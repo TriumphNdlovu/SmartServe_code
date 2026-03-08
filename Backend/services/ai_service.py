@@ -5,7 +5,9 @@ OLLAMA_URL = "http://localhost:11434/api/chat"
 
 def ask_ai(question):
 
+    print("ask_ai: {question}")
     context = retrieve_context(question)
+    print(f"retrieved Context: {context}")
 
     prompt = f"""
     Context:
