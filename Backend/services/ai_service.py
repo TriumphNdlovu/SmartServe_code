@@ -1,27 +1,37 @@
 import requests
 from rag.retriever import retrieve_context
+from services.policy_service import get_policy
 
 OLLAMA_URL = "http://localhost:11434/api/chat"
 
-def ask_ai(question):
+def ask_ai(question, policy_number="POL12345"):
 
-    print("ask_ai: {question}")
+    print(f"ask_ai: {question}")
+
+    # Get relevant context from your vector DB
     context = retrieve_context(question)
-    print(f"retrieved Context: {context}")
+    context_text = "\n".join(context) if context else "No context available."
+
+    # Get policy JSON for the user
+    policy_json = get_policy(policy_number)
+
+    print(f"retrieved Context: {context_text}")
 
     prompt = f"""
-    You are an assistant for a self-service insurance portal. Answer questions using only the information provided in the context below. 
-    Do not guess or provide information that is not in the context. 
-    If the answer is not available in the context, respond politely: "I’m sorry, I don’t have that information in your policy documents".
+            You are an assistant for a self-service insurance portal. Answer questions using ONLY the information provided in the context below. 
+            Do not guess or provide information that is not in the context. 
+            If the answer cannot be retrieved from the context or policy details, respond politely: "I'm sorry, I don't have that information in your policy documents".
 
-    User: User
-    Question: {question}
+            User: Policy holder
+            
+            Question: {question}
 
-    Context:
-    {context}
+            Context and Policy details:
+            Context: {context_text}
+            Policy: {policy_json}
 
-    Answer:
-    """
+            Answer:
+            """
 
     payload = {
         "model": "gemma3:4b",
@@ -32,5 +42,8 @@ def ask_ai(question):
     }
 
     response = requests.post(OLLAMA_URL, json=payload)
+
+    if response.status_code != 200:
+        return f"Error contacting AI SmartServe: {response.text}"
 
     return response.json()["message"]["content"]

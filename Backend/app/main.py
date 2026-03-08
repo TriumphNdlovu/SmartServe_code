@@ -12,15 +12,7 @@ load_index()  # loads FAISS index and documents from disk if they exist
 
 app = FastAPI()
 
-# ------------------------
-# Request model
-# ------------------------
-class QuestionRequest(BaseModel):
-    question: str
 
-# ------------------------
-# API endpoint
-# ------------------------
 @app.post("/ask-ai")
 def ask_ai_endpoint(request: QuestionRequest):
     """
@@ -32,9 +24,6 @@ def ask_ai_endpoint(request: QuestionRequest):
     answer = ask_ai(request.question)
     return {"answer": answer}
 
-# ------------------------
-# Optional health check
-# ------------------------
 @app.get("/health")
 def health_check():
     return {"status": "ok"}
