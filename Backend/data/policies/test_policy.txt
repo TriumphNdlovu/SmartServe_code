@@ -1,0 +1,6 @@
+Funeral Policy Rules:
+
+Natural death claims have a waiting period of 6 months.
+
+If the policyholder dies within 6 months of starting the policy,
+the claim will be rejected unless the death was accidental.
