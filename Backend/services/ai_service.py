@@ -10,13 +10,17 @@ def ask_ai(question):
     print(f"retrieved Context: {context}")
 
     prompt = f"""
+    You are an assistant for a self-service insurance portal. Answer questions using only the information provided in the context below. 
+    Do not guess or provide information that is not in the context. 
+    If the answer is not available in the context, respond politely: "I’m sorry, I don’t have that information in your policy documents".
+
+    User: User
+    Question: {question}
+
     Context:
     {context}
 
-    Question:
-    {question}
-
-    Answer using the provided context and if the information is not in context just say you do not know.
+    Answer:
     """
 
     payload = {
