@@ -10,7 +10,7 @@ def ask_ai(question, policy_number="POL12345"):
 
     # Get relevant context from your vector DB
     context = retrieve_context(question)
-    context_text = "\n".join(context) if context else "No context available."
+    context_text = context if context else "No context available."
 
     # Get policy JSON for the user
     policy_json = get_policy(policy_number)

@@ -1,0 +1,51 @@
+Insurance Self-Service Portal Business Rules
+
+Policy Lookup
+Users must provide a valid policy number to access their policy information.
+If the policy number does not exist, the system will return a "Policy not found" message.
+
+Authentication
+Users may only access policies that belong to them.
+The system must verify the user's identity before displaying sensitive policy details.
+
+Policy Status
+Policies may have one of the following statuses:
+- Active
+- Lapsed
+- Cancelled
+- Pending
+
+Only active policies allow claims to be submitted.
+
+Premium Payments
+Premiums are billed monthly.
+Payments must be made on or before the due date.
+
+Grace Period
+A grace period of 30 days is allowed for late premium payments.
+If payment is not received within the grace period, the policy status will change to "Lapsed".
+
+Policy Reinstatement
+Lapsed policies may be reinstated within 90 days from the lapse date.
+All outstanding premiums must be paid before reinstatement can occur.
+
+Beneficiary Updates
+Policyholders may update beneficiaries through the self-service portal.
+Changes to beneficiaries will only take effect after successful verification.
+
+Claims Submission
+Claims may only be submitted for active policies.
+The system must verify that the policy meets waiting period requirements before allowing claim submission.
+
+Claim Processing
+Once all required documents are submitted, claims are processed within 5–10 business days.
+
+System Notifications
+The system will notify users when:
+- A premium payment is due
+- A policy has lapsed
+- A claim has been approved or rejected
+
+Data Privacy
+Policyholder data must be protected and only displayed to authorized users.
+The system must comply with data protection regulations.
