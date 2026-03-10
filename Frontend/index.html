@@ -1,49 +1,195 @@
 <!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI Insurance Chatbot</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
+  <div class="app-container">
 
-<div class="app">
+    <!-- LOGIN SCREEN -->
+    <section id="loginScreen" class="login-screen">
+      <div class="login-left">
+        <div class="brand-badge">Smart Insurance AI</div>
+        <h1>Your AI insurance assistant</h1>
+        <p>
+          Log in using your contract reference and password to view your policy summary,
+          recent claims, premium details, and chat with the assistant.
+        </p>
+      </div>
 
-  <!-- LOGIN SCREEN -->
-  <div id="loginScreen" class="login-screen">
-    <div class="login-card">
-      <h2>AI Insurance Chatbot</h2>
+      <div class="login-right">
+        <div class="login-card">
+          <h2>Login</h2>
+          <p class="subtext">Access your insurance chatbot portal</p>
 
-      <label>Contract Reference</label>
-      <input type="text" id="contractRef" placeholder="Enter contract reference">
+          <label for="contractRef">Contract Reference</label>
+          <input type="text" id="contractRef" placeholder="Enter contract reference">
 
-      <label>Password</label>
-      <input type="password" id="password" placeholder="Enter password">
+          <label for="password">Password</label>
+          <input type="password" id="password" placeholder="Enter password">
 
-      <button onclick="login()">Login</button>
-      <p id="loginError" class="error"></p>
-    </div>
+          <button onclick="login()">Login</button>
+          <p id="loginError" class="error"></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- MAIN APP -->
+    <section id="mainApp" class="main-app hidden">
+      <aside class="sidebar">
+        <div>
+          <h2>InsureBot</h2>
+          <p class="sidebar-sub">Insurance self-service portal</p>
+
+          <nav class="menu">
+            <button class="menu-item active" onclick="showSection('dashboardSection', this)">Dashboard</button>
+            <button class="menu-item" onclick="showSection('chatSection', this)">Chat Assistant</button>
+            <button class="menu-item" onclick="showSection('claimsSection', this)">Claims</button>
+            <button class="menu-item" onclick="showSection('policySection', this)">Policy</button>
+          </nav>
+        </div>
+
+        <button class="logout-btn" onclick="logout()">Logout</button>
+      </aside>
+
+      <main class="content-area">
+        <header class="topbar">
+          <div>
+            <h3>Welcome, <span id="clientName">Client</span></h3>
+            <p id="contractDisplay">Contract Ref: -</p>
+          </div>
+        </header>
+
+        <!-- DASHBOARD -->
+        <section id="dashboardSection" class="section-view">
+          <div class="cards-grid">
+            <div class="info-card">
+              <span>Policy Type</span>
+              <h4>Comprehensive Cover</h4>
+              <p>Vehicle, accident and damage protection.</p>
+            </div>
+            <div class="info-card">
+              <span>Premium Due</span>
+              <h4>25 March 2026</h4>
+              <p>Next debit order scheduled successfully.</p>
+            </div>
+            <div class="info-card">
+              <span>Claims Status</span>
+              <h4>1 Open Claim</h4>
+              <p>Latest claim currently under assessment.</p>
+            </div>
+          </div>
+
+          <div class="panel-grid">
+            <div class="panel">
+              <h4>Recent Activity</h4>
+              <ul class="activity-list">
+                <li>Claim #CLM-2048 submitted for windscreen damage</li>
+                <li>March premium payment processed</li>
+                <li>Policy schedule updated successfully</li>
+              </ul>
+            </div>
+
+            <div class="panel">
+              <h4>Quick Actions</h4>
+              <div class="quick-actions">
+                <button onclick="prefillMessage('Check my latest claim status')">Claim status</button>
+                <button onclick="prefillMessage('What does my policy cover?')">Policy cover</button>
+                <button onclick="prefillMessage('When is my next premium due?')">Premium due</button>
+                <button onclick="prefillMessage('How do I submit a new claim?')">Submit claim</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CHAT -->
+        <section id="chatSection" class="section-view hidden">
+          <div class="chat-wrapper">
+            <div id="chatMessages" class="chat-messages">
+              <div class="bot-message">Hello 👋 I am your AI insurance assistant. Ask me about claims, policy cover, premiums, excess, or benefits.</div>
+            </div>
+
+            <div class="chat-input-row">
+              <input id="messageInput" type="text" placeholder="Type your message...">
+              <button onclick="sendMessage()">Send</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- CLAIMS -->
+        <section id="claimsSection" class="section-view hidden">
+          <div class="panel">
+            <h4>Claims Overview</h4>
+            <table class="claims-table">
+              <thead>
+                <tr>
+                  <th>Claim Number</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>CLM-2048</td>
+                  <td>Windscreen Damage</td>
+                  <td>Under Review</td>
+                  <td>08 Mar 2026</td>
+                </tr>
+                <tr>
+                  <td>CLM-1981</td>
+                  <td>Accident Repair</td>
+                  <td>Closed</td>
+                  <td>12 Feb 2026</td>
+                </tr>
+                <tr>
+                  <td>CLM-1765</td>
+                  <td>Theft</td>
+                  <td>Closed</td>
+                  <td>22 Dec 2025</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- POLICY -->
+        <section id="policySection" class="section-view hidden">
+          <div class="cards-grid">
+            <div class="info-card">
+              <span>Plan</span>
+              <h4>Gold Secure Plan</h4>
+              <p>Comprehensive insurance cover package.</p>
+            </div>
+            <div class="info-card">
+              <span>Excess</span>
+              <h4>R2,500</h4>
+              <p>Standard excess payable on approved claims.</p>
+            </div>
+            <div class="info-card">
+              <span>Policy Start</span>
+              <h4>01 Jan 2026</h4>
+              <p>Your policy is active and in force.</p>
+            </div>
+          </div>
+
+          <div class="panel">
+            <h4>Included Benefits</h4>
+            <ul class="activity-list">
+              <li>Accidental damage cover</li>
+              <li>Third-party liability protection</li>
+              <li>Emergency roadside assistance</li>
+              <li>Windscreen and glass benefit</li>
+            </ul>
+          </div>
+        </section>
+      </main>
+    </section>
   </div>
 
-
-  <!-- CHATBOT SCREEN -->
-  <div id="chatScreen" class="chat-screen hidden">
-
-    <div class="chat-header">
-      <h3>Insurance AI Assistant</h3>
-      <button onclick="logout()">Logout</button>
-    </div>
-
-    <div id="chatMessages" class="chat-messages">
-      <div class="bot-message">Hello 👋 I am your insurance assistant. How can I help you?</div>
-    </div>
-
-    <div class="chat-input">
-      <input id="messageInput" type="text" placeholder="Type your message...">
-      <button onclick="sendMessage()">Send</button>
-    </div>
-
-  </div>
-
-</div>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
