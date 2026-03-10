@@ -1,4 +1,77 @@
 body{
+  font-family: Arial, Helvetica, sans-serif;
+  margin:0;
+  background:#f4f6f9;
+}
+
+.hidden{
+  display:none;
+}
+
+.login-screen{
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.login-card{
+  background:white;
+  padding:40px;
+  border-radius:10px;
+  width:320px;
+  box-shadow:0 5px 20px rgba(0,0,0,0.1);
+}
+
+.login-card h2{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+.login-card label{
+  font-size:14px;
+  margin-top:10px;
+  display:block;
+}
+
+.login-card input{
+  width:100%;
+  padding:10px;
+  margin-top:5px;
+  border:1px solid #ccc;
+  border-radius:5px;
+}
+
+.login-card button{
+  margin-top:20px;
+  width:100%;
+  padding:10px;
+  border:none;
+  background:#007bff;
+  color:white;
+  border-radius:5px;
+  cursor:pointer;
+}
+
+.error{
+  color:red;
+  font-size:12px;
+}
+
+.chat-screen{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+}
+
+.chat-header{
+  background:#007bff;
+  color:white;
+  padding:15px;
+  display:flex;
+  justify-content:space-between;
+}
+
 .chat-messages{
   flex:1;
   padding:20px;
