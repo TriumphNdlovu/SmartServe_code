@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+  <title>AI Insurance Chatbot</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="app">
+
+  <!-- LOGIN SCREEN -->
+  <div id="loginScreen" class="login-screen">
+    <div class="login-card">
+      <h2>AI Insurance Chatbot</h2>
+
+      <label>Contract Reference</label>
+      <input type="text" id="contractRef" placeholder="Enter contract reference">
+
+      <label>Password</label>
+      <input type="password" id="password" placeholder="Enter password">
+
+      <button onclick="login()">Login</button>
+      <p id="loginError" class="error"></p>
+    </div>
+  </div>
+
+
+  <!-- CHATBOT SCREEN -->
+  <div id="chatScreen" class="chat-screen hidden">
+
+    <div class="chat-header">
+      <h3>Insurance AI Assistant</h3>
+      <button onclick="logout()">Logout</button>
+    </div>
+
+    <div id="chatMessages" class="chat-messages">
+      <div class="bot-message">Hello 👋 I am your insurance assistant. How can I help you?</div>
+    </div>
+
+    <div class="chat-input">
+      <input id="messageInput" type="text" placeholder="Type your message...">
+      <button onclick="sendMessage()">Send</button>
+    </div>
+
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
