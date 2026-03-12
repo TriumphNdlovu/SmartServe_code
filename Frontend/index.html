@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI Insurance Chatbot</title>
+  <title>SmartServe — Insurance Portal</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -12,26 +15,75 @@
     <!-- LOGIN SCREEN -->
     <section id="loginScreen" class="login-screen">
       <div class="login-left">
-        <div class="brand-badge">Smart Insurance AI</div>
-        <h1>Your AI insurance assistant</h1>
-        <p>
-          Log in using your contract reference and password to view your policy summary,
-          recent claims, premium details, and chat with the assistant.
-        </p>
+        <div class="login-left-inner">
+          <div class="brand-logo">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M14 2L26 8V16C26 21.523 20.627 25.907 14 26C7.373 25.907 2 21.523 2 16V8L14 2Z" fill="white" fill-opacity="0.15" stroke="white" stroke-width="1.5"/>
+              <path d="M9 14L12.5 17.5L19 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>SmartServe</span>
+          </div>
+
+          <div class="login-hero">
+            <h1>Your AI insurance<br><em>assistant.</em></h1>
+            <p>Log in to view your policy, track claims, check your premium schedule, and chat with our AI assistant anytime.</p>
+          </div>
+
+          <div class="trust-items">
+            <div class="trust-item">
+              <div class="trust-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-opacity="0.6" stroke-width="1.2"/><path d="M5 8L7 10L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span>Real-time claim tracking</span>
+            </div>
+            <div class="trust-item">
+              <div class="trust-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-opacity="0.6" stroke-width="1.2"/><path d="M5 8L7 10L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span>AI-powered support, 24/7</span>
+            </div>
+            <div class="trust-item">
+              <div class="trust-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="7" stroke="white" stroke-opacity="0.6" stroke-width="1.2"/><path d="M5 8L7 10L11 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span>Secure, encrypted portal</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decorative geometric shapes -->
+        <div class="geo geo-1"></div>
+        <div class="geo geo-2"></div>
+        <div class="geo geo-3"></div>
       </div>
 
       <div class="login-right">
         <div class="login-card">
-          <h2>Login</h2>
-          <p class="subtext">Access your insurance chatbot portal</p>
+          <div class="login-card-header">
+            <h2>Welcome back</h2>
+            <p class="subtext">Sign in to your insurance portal</p>
+          </div>
 
-          <label for="contractRef">Contract Reference</label>
-          <input type="text" id="contractRef" placeholder="Enter contract reference">
+          <div class="form-group">
+            <label for="contractRef">Contract Reference</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="3" width="12" height="10" rx="2" stroke="currentColor" stroke-width="1.3"/><path d="M5 7H11M5 10H9" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              <input type="text" id="contractRef" placeholder="e.g. REF-2024-0048">
+            </div>
+          </div>
 
-          <label for="password">Password</label>
-          <input type="password" id="password" placeholder="Enter password">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="3" y="7" width="10" height="7" rx="1.5" stroke="currentColor" stroke-width="1.3"/><path d="M5 7V5.5A3 3 0 0 1 11 5.5V7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              <input type="password" id="password" placeholder="Enter your password">
+            </div>
+          </div>
 
-          <button onclick="login()">Login</button>
+          <button class="login-btn" onclick="login()">
+            <span>Sign in</span>
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8H13M9 4L13 8L9 12" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
           <p id="loginError" class="error"></p>
         </div>
       </div>
@@ -40,66 +92,149 @@
     <!-- MAIN APP -->
     <section id="mainApp" class="main-app hidden">
       <aside class="sidebar">
-        <div>
-          <h2>InsureBot</h2>
-          <p class="sidebar-sub">Insurance self-service portal</p>
+        <div class="sidebar-top">
+          <div class="sidebar-brand">
+            <div class="sidebar-logo">
+              <svg width="20" height="20" viewBox="0 0 28 28" fill="none">
+                <path d="M14 2L26 8V16C26 21.523 20.627 25.907 14 26C7.373 25.907 2 21.523 2 16V8L14 2Z" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5"/>
+                <path d="M9 14L12.5 17.5L19 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <div>
+              <div class="sidebar-name">SmartServe</div>
+              <div class="sidebar-sub">Insurance Portal</div>
+            </div>
+          </div>
 
           <nav class="menu">
-            <button class="menu-item active" onclick="showSection('dashboardSection', this)">Dashboard</button>
-            <button class="menu-item" onclick="showSection('chatSection', this)">Chat Assistant</button>
-            <button class="menu-item" onclick="showSection('claimsSection', this)">Claims</button>
-            <button class="menu-item" onclick="showSection('policySection', this)">Policy</button>
+            <button class="menu-item active" onclick="showSection('dashboardSection', this)">
+              <span class="menu-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" stroke-width="1.4"/></svg>
+              </span>
+              Dashboard
+            </button>
+            <button class="menu-item" onclick="showSection('chatSection', this)">
+              <span class="menu-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13 2H3C2.448 2 2 2.448 2 3V10C2 10.552 2.448 11 3 11H5L8 14L11 11H13C13.552 11 14 10.552 14 10V3C14 2.448 13.552 2 13 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+              </span>
+              Chat Assistant
+            </button>
+            <button class="menu-item" onclick="showSection('claimsSection', this)">
+              <span class="menu-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M9 2H4C3.448 2 3 2.448 3 3V13C3 13.552 3.448 14 4 14H12C12.552 14 13 13.552 13 13V6L9 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/><path d="M9 2V6H13" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M6 9H10M6 11.5H8.5" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+              </span>
+              Claims
+            </button>
+            <button class="menu-item" onclick="showSection('policySection', this)">
+              <span class="menu-icon">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L14 5V9C14 12 11.5 14.5 8 15C4.5 14.5 2 12 2 9V5L8 2Z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+              </span>
+              Policy
+            </button>
           </nav>
         </div>
 
-        <button class="logout-btn" onclick="logout()">Logout</button>
+        <div class="sidebar-bottom">
+          <div class="sidebar-user">
+            <div class="user-avatar" id="userAvatar">—</div>
+            <div class="user-info">
+              <div class="user-name" id="sidebarName">Client</div>
+              <div class="user-ref" id="sidebarRef">—</div>
+            </div>
+          </div>
+          <button class="logout-btn" onclick="logout()">
+            <svg width="15" height="15" viewBox="0 0 16 16" fill="none"><path d="M6 2H3C2.448 2 2 2.448 2 3V13C2 13.552 2.448 14 3 14H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/><path d="M10 5L14 8L10 11" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/><path d="M14 8H6" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+            Sign out
+          </button>
+        </div>
       </aside>
 
       <main class="content-area">
         <header class="topbar">
-          <div>
-            <h3>Welcome, <span id="clientName">Client</span></h3>
-            <p id="contractDisplay">Contract Ref: -</p>
+          <div class="topbar-left">
+            <h3>Welcome back, <span id="clientName">Client</span></h3>
+            <p id="contractDisplay">Contract Ref: —</p>
+          </div>
+          <div class="topbar-right">
+            <div class="status-pill">
+              <span class="status-dot"></span>
+              Policy active
+            </div>
           </div>
         </header>
 
         <!-- DASHBOARD -->
         <section id="dashboardSection" class="section-view">
           <div class="cards-grid">
-            <div class="info-card">
-              <span>Policy Type</span>
+            <div class="info-card card-blue">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 6V11C18 15 14.5 18.5 10 19C5.5 18.5 2 15 2 11V6L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="card-label">Policy Type</span>
               <h4>Comprehensive Cover</h4>
               <p>Vehicle, accident and damage protection.</p>
             </div>
-            <div class="info-card">
-              <span>Premium Due</span>
+            <div class="info-card card-teal">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 4V3M14 4V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 9H18" stroke="currentColor" stroke-width="1.5"/></svg>
+              </div>
+              <span class="card-label">Premium Due</span>
               <h4>25 March 2026</h4>
-              <p>Next debit order scheduled successfully.</p>
+              <p>Next debit order scheduled.</p>
             </div>
-            <div class="info-card">
-              <span>Claims Status</span>
+            <div class="info-card card-amber">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M10 6V10L13 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="card-label">Claims Status</span>
               <h4>1 Open Claim</h4>
-              <p>Latest claim currently under assessment.</p>
+              <p>Latest claim under assessment.</p>
             </div>
           </div>
 
           <div class="panel-grid">
             <div class="panel">
-              <h4>Recent Activity</h4>
+              <div class="panel-header">
+                <h4>Recent Activity</h4>
+                <span class="panel-badge">3 items</span>
+              </div>
               <ul class="activity-list">
-                <li>Claim #CLM-2048 submitted for windscreen damage</li>
-                <li>March premium payment processed</li>
-                <li>Policy schedule updated successfully</li>
+                <li>
+                  <span class="activity-dot dot-blue"></span>
+                  <span>Claim <strong>#CLM-2048</strong> submitted for windscreen damage</span>
+                </li>
+                <li>
+                  <span class="activity-dot dot-teal"></span>
+                  <span>March premium payment processed</span>
+                </li>
+                <li>
+                  <span class="activity-dot dot-gray"></span>
+                  <span>Policy schedule updated successfully</span>
+                </li>
               </ul>
             </div>
 
             <div class="panel">
-              <h4>Quick Actions</h4>
+              <div class="panel-header">
+                <h4>Quick Actions</h4>
+              </div>
               <div class="quick-actions">
-                <button onclick="prefillMessage('Check my latest claim status')">Claim status</button>
-                <button onclick="prefillMessage('What does my policy cover?')">Policy cover</button>
-                <button onclick="prefillMessage('When is my next premium due?')">Premium due</button>
-                <button onclick="prefillMessage('How do I submit a new claim?')">Submit claim</button>
+                <button onclick="prefillMessage('Check my latest claim status')">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M9 2H4C3.448 2 3 2.448 3 3V13C3 13.552 3.448 14 4 14H12C12.552 14 13 13.552 13 13V6L9 2Z" stroke="currentColor" stroke-width="1.4"/></svg>
+                  Claim status
+                </button>
+                <button onclick="prefillMessage('What does my policy cover?')">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2L14 5V9C14 12 11.5 14.5 8 15C4.5 14.5 2 12 2 9V5L8 2Z" stroke="currentColor" stroke-width="1.4"/></svg>
+                  Policy cover
+                </button>
+                <button onclick="prefillMessage('When is my next premium due?')">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M2 8H14" stroke="currentColor" stroke-width="1.4"/></svg>
+                  Premium due
+                </button>
+                <button onclick="prefillMessage('How do I submit a new claim?')">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M8 5V8M8 11H8.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                  Submit claim
+                </button>
               </div>
             </div>
           </div>
@@ -108,13 +243,27 @@
         <!-- CHAT -->
         <section id="chatSection" class="section-view hidden">
           <div class="chat-wrapper">
+            <div class="chat-header">
+              <div class="chat-avatar">
+                <svg width="18" height="18" viewBox="0 0 28 28" fill="none"><path d="M14 2L26 8V16C26 21.523 20.627 25.907 14 26C7.373 25.907 2 21.523 2 16V8L14 2Z" fill="white" fill-opacity="0.3" stroke="white" stroke-width="1.5"/><path d="M9 14L12.5 17.5L19 11" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <div>
+                <div class="chat-agent-name">AI Assistant</div>
+                <div class="chat-agent-status"><span class="status-dot small"></span> Online</div>
+              </div>
+            </div>
+
             <div id="chatMessages" class="chat-messages">
-              <div class="bot-message">Hello 👋 I am your AI insurance assistant. Ask me about claims, policy cover, premiums, excess, or benefits.</div>
+              <div class="bot-message">
+                <div class="bot-bubble">Hello 👋 I'm your AI insurance assistant. Ask me about your claims, policy cover, premiums, excess, or any benefits.</div>
+              </div>
             </div>
 
             <div class="chat-input-row">
-              <input id="messageInput" type="text" placeholder="Type your message...">
-              <button onclick="sendMessage()">Send</button>
+              <input id="messageInput" type="text" placeholder="Ask about your policy, claims, or benefits…">
+              <button onclick="sendMessage()" class="send-btn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 8H2.5M9.5 4L13.5 8L9.5 12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
             </div>
           </div>
         </section>
@@ -122,7 +271,10 @@
         <!-- CLAIMS -->
         <section id="claimsSection" class="section-view hidden">
           <div class="panel">
-            <h4>Claims Overview</h4>
+            <div class="panel-header">
+              <h4>Claims Overview</h4>
+              <span class="panel-badge">3 records</span>
+            </div>
             <table class="claims-table">
               <thead>
                 <tr>
@@ -134,21 +286,21 @@
               </thead>
               <tbody>
                 <tr>
-                  <td>CLM-2048</td>
+                  <td><span class="claim-ref">CLM-2048</span></td>
                   <td>Windscreen Damage</td>
-                  <td>Under Review</td>
+                  <td><span class="badge badge-review">Under Review</span></td>
                   <td>08 Mar 2026</td>
                 </tr>
                 <tr>
-                  <td>CLM-1981</td>
+                  <td><span class="claim-ref">CLM-1981</span></td>
                   <td>Accident Repair</td>
-                  <td>Closed</td>
+                  <td><span class="badge badge-closed">Closed</span></td>
                   <td>12 Feb 2026</td>
                 </tr>
                 <tr>
-                  <td>CLM-1765</td>
+                  <td><span class="claim-ref">CLM-1765</span></td>
                   <td>Theft</td>
-                  <td>Closed</td>
+                  <td><span class="badge badge-closed">Closed</span></td>
                   <td>22 Dec 2025</td>
                 </tr>
               </tbody>
@@ -159,30 +311,62 @@
         <!-- POLICY -->
         <section id="policySection" class="section-view hidden">
           <div class="cards-grid">
-            <div class="info-card">
-              <span>Plan</span>
+            <div class="info-card card-blue">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 6V11C18 15 14.5 18.5 10 19C5.5 18.5 2 15 2 11V6L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="card-label">Plan</span>
               <h4>Gold Secure Plan</h4>
               <p>Comprehensive insurance cover package.</p>
             </div>
-            <div class="info-card">
-              <span>Excess</span>
+            <div class="info-card card-teal">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              </div>
+              <span class="card-label">Excess</span>
               <h4>R2,500</h4>
-              <p>Standard excess payable on approved claims.</p>
+              <p>Payable on approved claims.</p>
             </div>
-            <div class="info-card">
-              <span>Policy Start</span>
+            <div class="info-card card-green">
+              <div class="card-icon">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 10L9 12.5L13.5 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+              <span class="card-label">Policy Start</span>
               <h4>01 Jan 2026</h4>
               <p>Your policy is active and in force.</p>
             </div>
           </div>
 
           <div class="panel">
-            <h4>Included Benefits</h4>
-            <ul class="activity-list">
-              <li>Accidental damage cover</li>
-              <li>Third-party liability protection</li>
-              <li>Emergency roadside assistance</li>
-              <li>Windscreen and glass benefit</li>
+            <div class="panel-header">
+              <h4>Included Benefits</h4>
+              <span class="badge badge-active">Active</span>
+            </div>
+            <ul class="benefits-list">
+              <li>
+                <span class="benefit-icon">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                Accidental damage cover
+              </li>
+              <li>
+                <span class="benefit-icon">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                Third-party liability protection
+              </li>
+              <li>
+                <span class="benefit-icon">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                Emergency roadside assistance
+              </li>
+              <li>
+                <span class="benefit-icon">
+                  <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M3 8L6.5 11.5L13 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </span>
+                Windscreen and glass benefit
+              </li>
             </ul>
           </div>
         </section>

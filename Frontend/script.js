@@ -1,6 +1,6 @@
-const API_BASE = "http://localhost:8000"; // I will change this once we go live, sorry guys
+const API_BASE = "http://localhost:8000";
 
-// ─── Auth ────────────────────────────────────────────────────────────────────
+// ─── Auth ─────────────────────────────────────────────────────────────────
 
 function login() {
   const contract = document.getElementById("contractRef").value.trim();
@@ -8,15 +8,22 @@ function login() {
   const loginError = document.getElementById("loginError");
 
   if (contract === "" || password === "") {
-    loginError.innerText = "Please enter contract reference and password";
+    loginError.innerText = "Please enter your contract reference and password.";
     return;
   }
 
   loginError.innerText = "";
+
+  // Populate user info across the UI
+  const initials = contract.replace(/[^A-Z0-9]/gi, "").slice(0, 2).toUpperCase() || "?";
+  document.getElementById("userAvatar").innerText = initials;
+  document.getElementById("sidebarName").innerText = contract;
+  document.getElementById("sidebarRef").innerText = "Logged in";
+  document.getElementById("clientName").innerText = contract;
+  document.getElementById("contractDisplay").innerText = "Contract Ref: " + contract;
+
   document.getElementById("loginScreen").classList.add("hidden");
   document.getElementById("mainApp").classList.remove("hidden");
-  document.getElementById("contractDisplay").innerText = "Contract Ref: " + contract;
-  document.getElementById("clientName").innerText = contract;
 }
 
 function logout() {
@@ -24,9 +31,10 @@ function logout() {
   document.getElementById("loginScreen").classList.remove("hidden");
   document.getElementById("contractRef").value = "";
   document.getElementById("password").value = "";
+  document.getElementById("loginError").innerText = "";
 }
 
-// ─── Navigation ──────────────────────────────────────────────────────────────
+// ─── Navigation ───────────────────────────────────────────────────────────
 
 function showSection(sectionId, buttonElement) {
   document.querySelectorAll(".section-view").forEach(s => s.classList.add("hidden"));
@@ -42,16 +50,35 @@ function prefillMessage(text) {
   document.getElementById("messageInput").focus();
 }
 
-// ─── Chat ─────────────────────────────────────────────────────────────────────
+// ─── Chat ─────────────────────────────────────────────────────────────────
 
-function appendMessage(text, className) {
+function appendBotMessage(content, isLoading = false) {
+  const chat = document.getElementById("chatMessages");
+  const wrapper = document.createElement("div");
+  wrapper.className = "bot-message" + (isLoading ? " loading" : "");
+
+  const bubble = document.createElement("div");
+  bubble.className = "bot-bubble";
+
+  if (isLoading) {
+    bubble.innerHTML = `<div class="dot-loader"><span></span><span></span><span></span></div>`;
+  } else {
+    bubble.innerText = content;
+  }
+
+  wrapper.appendChild(bubble);
+  chat.appendChild(wrapper);
+  chat.scrollTop = chat.scrollHeight;
+  return wrapper;
+}
+
+function appendUserMessage(text) {
   const chat = document.getElementById("chatMessages");
   const msg = document.createElement("div");
-  msg.className = className;
+  msg.className = "user-message";
   msg.innerText = text;
   chat.appendChild(msg);
   chat.scrollTop = chat.scrollHeight;
-  return msg;
 }
 
 async function sendMessage() {
@@ -59,15 +86,12 @@ async function sendMessage() {
   const message = input.value.trim();
   if (message === "") return;
 
-  // Disable input while waiting
   input.value = "";
   input.disabled = true;
-  document.querySelector(".chat-input-row button").disabled = true;
+  document.querySelector(".send-btn").disabled = true;
 
-  appendMessage(message, "user-message");
-
-  // Loading indicator
-  const loadingMsg = appendMessage("Thinking…", "bot-message loading");
+  appendUserMessage(message);
+  const loadingEl = appendBotMessage("", true);
 
   try {
     const response = await fetch(`${API_BASE}/ask-ai`, {
@@ -76,30 +100,29 @@ async function sendMessage() {
       body: JSON.stringify({ question: message }),
     });
 
-    if (!response.ok) {
-      throw new Error(`Server responded with status ${response.status}`);
-    }
+    if (!response.ok) throw new Error(`Server error: ${response.status}`);
 
     const data = await response.json();
-    loadingMsg.innerText = data.answer;
-    loadingMsg.classList.remove("loading");
+
+    // Replace loader with real answer
+    loadingEl.classList.remove("loading");
+    loadingEl.querySelector(".bot-bubble").innerText = data.answer;
 
   } catch (err) {
     console.error("AI request failed:", err);
-    loadingMsg.innerText = "Sorry, I couldn't reach the assistant. Please try again.";
-    loadingMsg.classList.remove("loading");
+    loadingEl.classList.remove("loading");
+    loadingEl.querySelector(".bot-bubble").innerText =
+      "Sorry, I couldn't reach the assistant right now. Please try again.";
   } finally {
-    // Re-enable input
     input.disabled = false;
-    document.querySelector(".chat-input-row button").disabled = false;
+    document.querySelector(".send-btn").disabled = false;
     input.focus();
+    document.getElementById("chatMessages").scrollTop =
+      document.getElementById("chatMessages").scrollHeight;
   }
-
-  document.getElementById("chatMessages").scrollTop =
-    document.getElementById("chatMessages").scrollHeight;
 }
 
-// ─── Keyboard shortcut ───────────────────────────────────────────────────────
+// ─── Keyboard ─────────────────────────────────────────────────────────────
 
 document.addEventListener("keydown", function (event) {
   const input = document.getElementById("messageInput");
