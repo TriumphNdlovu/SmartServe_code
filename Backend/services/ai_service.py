@@ -4,7 +4,7 @@ from services.policy_service import get_policy
 
 OLLAMA_URL = "http://localhost:11434/api/chat"
 
-def ask_ai(question, policy_number="POL12345"):
+def ask_ai(question, policy_number):
 
     print(f"ask_ai: {question}")
 

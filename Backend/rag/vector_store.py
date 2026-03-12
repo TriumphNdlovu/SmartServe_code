@@ -25,7 +25,7 @@ def add_document(text, embedding):
 # ------------------------
 # Search
 # ------------------------
-def search(query_embedding, k=5):
+def search(query_embedding, k=2):
     if len(documents) == 0:
         return []
 

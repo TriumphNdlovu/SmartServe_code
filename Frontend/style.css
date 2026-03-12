@@ -818,7 +818,43 @@ body {
   flex-shrink: 0;
 }
 
-/* ─── Responsive ─────────────────────────────────────────────────────────── */
+/* ─── Status colour variants ─────────────────────────────────────────────── */
+.status-pill.status-green { background: var(--green-light); color: var(--green-text); }
+.status-pill.status-amber { background: var(--amber-light); color: var(--amber-text); }
+.status-pill.status-red   { background: var(--danger-light); color: var(--danger); }
+.status-pill.status-blue  { background: var(--accent-light); color: var(--accent-text); }
+.status-pill.status-gray  { background: var(--surface-2); color: var(--text-muted); }
+
+.text-green { color: var(--green); }
+.text-amber { color: var(--amber); }
+.text-red   { color: var(--danger); }
+.text-blue  { color: var(--accent); }
+.text-gray  { color: var(--text-muted); }
+
+/* ─── Benefit row (label + meta inline) ──────────────────────────────────── */
+.benefit-row {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.benefit-name { font-size: 14px; color: var(--text-primary); }
+
+.benefit-metas { display: flex; gap: 10px; flex-wrap: wrap; }
+
+.benefit-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 2px 8px;
+  border-radius: 999px;
+}
+
+.empty-state { color: var(--text-muted); font-size: 13px; font-style: italic; }
+
+/* ─── Benefits list items need align-items: flex-start ───────────────────── */
+.benefits-list li { align-items: flex-start; }
 @media (max-width: 1024px) {
   .cards-grid { grid-template-columns: 1fr 1fr; }
 }

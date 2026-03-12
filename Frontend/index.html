@@ -156,9 +156,8 @@
             <p id="contractDisplay">Contract Ref: —</p>
           </div>
           <div class="topbar-right">
-            <div class="status-pill">
-              <span class="status-dot"></span>
-              Policy active
+            <div id="statusPill" class="status-pill status-green">
+              <span class="status-dot"></span> In Force
             </div>
           </div>
         </header>
@@ -187,8 +186,8 @@
                 <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M10 6V10L13 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
               <span class="card-label">Policy Status</span>
-              <h4 id="dashStatus">—</h4>
-              <p>Disability benefit claim under assessment.</p>
+              <h4 id="dashStatus" class="status-text">—</h4>
+              <p id="dashStatusDesc">Current standing of your policy.</p>
             </div>
           </div>
 
@@ -317,15 +316,15 @@
               </div>
               <span class="card-label">Plan</span>
               <h4 id="polPlanName">—</h4>
-              <p>Comprehensive life cover package.</p>
+              <p>Your active cover package.</p>
             </div>
             <div class="info-card card-teal">
               <div class="card-icon">
-                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M7 10H13M10 7V13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 4V3M14 4V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 9H18" stroke="currentColor" stroke-width="1.5"/></svg>
               </div>
               <span class="card-label">Monthly Premium</span>
               <h4 id="polPremium">—</h4>
-              <p>Deducted via monthly debit order.</p>
+              <p id="polCollectionDay">Monthly debit order.</p>
             </div>
             <div class="info-card card-green">
               <div class="card-icon">
@@ -333,18 +332,30 @@
               </div>
               <span class="card-label">Cover Period</span>
               <h4 id="polStartDate">—</h4>
-              <p>Ends: <span id="polEndDate">—</span></p>
+              <p>Matures: <span id="polEndDate">—</span></p>
             </div>
           </div>
 
-          <div class="panel">
-            <div class="panel-header">
-              <h4>Beneficiaries</h4>
-              <span class="badge badge-active">On record</span>
+          <div class="panel-grid">
+            <div class="panel">
+              <div class="panel-header">
+                <h4>Benefits</h4>
+                <span class="badge badge-active">Active</span>
+              </div>
+              <ul class="benefits-list" id="benefitsList">
+                <li>Loading…</li>
+              </ul>
             </div>
-            <ul class="benefits-list" id="beneficiariesList">
-              <li>Loading…</li>
-            </ul>
+
+            <div class="panel">
+              <div class="panel-header">
+                <h4>Beneficiaries</h4>
+                <span class="badge badge-active">On record</span>
+              </div>
+              <ul class="benefits-list" id="beneficiariesList">
+                <li>Loading…</li>
+              </ul>
+            </div>
           </div>
         </section>
       </main>
