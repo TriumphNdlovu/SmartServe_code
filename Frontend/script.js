@@ -1,3 +1,5 @@
+const API_BASE = "http://127.0.0.1:8000"; // I will change this once we go live
+
 function login() {
   const contract = document.getElementById("contractRef").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -41,7 +43,7 @@ function prefillMessage(text) {
   document.getElementById("messageInput").value = text;
 }
 
-function sendMessage() {
+async function sendMessage() {
   const input = document.getElementById("messageInput");
   const message = input.value.trim();
 
@@ -49,6 +51,7 @@ function sendMessage() {
 
   const chat = document.getElementById("chatMessages");
 
+  // Append user message
   const userMsg = document.createElement("div");
   userMsg.className = "user-message";
   userMsg.innerText = message;
@@ -57,38 +60,36 @@ function sendMessage() {
   input.value = "";
   chat.scrollTop = chat.scrollHeight;
 
-  setTimeout(() => {
-    const botMsg = document.createElement("div");
-    botMsg.className = "bot-message";
-    botMsg.innerText = getBotResponse(message);
-    chat.appendChild(botMsg);
-    chat.scrollTop = chat.scrollHeight;
-  }, 500);
+  // Show a loading indicator while waiting for the backend
+  const loadingMsg = document.createElement("div");
+  loadingMsg.className = "bot-message";
+  loadingMsg.innerText = "Thinking…";
+  chat.appendChild(loadingMsg);
+  chat.scrollTop = chat.scrollHeight;
+
+  try {
+    const response = await fetch(`${API_BASE}/ask-ai`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ question: message }),
+    });
+
+    if (!response.ok) {
+      throw new Error(`Server error: ${response.status}`);
+    }
+
+    const data = await response.json();
+    loadingMsg.innerText = data.answer;
+  } catch (err) {
+    console.error("AI request failed:", err);
+    loadingMsg.innerText =
+      "Sorry, I couldn't reach the server. Please try again.";
+  }
+
+  chat.scrollTop = chat.scrollHeight;
 }
 
-function getBotResponse(message) {
-  const text = message.toLowerCase();
-
-  if (text.includes("claim")) {
-    return "Your latest claim is currently under review. In a real app, this would fetch live claim data from your backend.";
-  }
-
-  if (text.includes("cover") || text.includes("policy")) {
-    return "Your policy includes comprehensive cover, third-party liability, and roadside assistance in this demo.";
-  }
-
-  if (text.includes("premium") || text.includes("due") || text.includes("payment")) {
-    return "Your next premium is scheduled for 25 March 2026. In production, this would come from the billing system.";
-  }
-
-  if (text.includes("excess")) {
-    return "Your standard excess in this demo policy is R2,500.";
-  }
-
-  return "This is a frontend demo response. Later, you can connect this UI to a real AI model or insurance API.";
-}
-
-document.addEventListener("keydown", function(event) {
+document.addEventListener("keydown", function (event) {
   const activeInput = document.getElementById("messageInput");
   if (!activeInput) return;
 
