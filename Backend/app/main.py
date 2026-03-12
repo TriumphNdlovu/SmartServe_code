@@ -1,40 +1,42 @@
-# app/main.py
+import os
 from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
-from rag.vector_store import load_index, search
-from rag.schemas import QuestionRequest
-from services.ai_service import ask_ai 
 from fastapi.middleware.cors import CORSMiddleware
-from services.policy_service import get_policy 
+from dotenv import load_dotenv
+from rag.vector_store import load_index
+from rag.schemas import QuestionRequest
+from services.ai_service import ask_ai
+from services.policy_service import get_policy
 
-load_index()  # loads FAISS index and documents from disk if they exist
+load_dotenv()
+
+FRONTEND_URL = os.getenv("FRONTEND_URL", "http://localhost:5500")
+
+load_index()
 
 app = FastAPI()
 
-app.add_middleware( # I will make the cors more strict later guys relax
+app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  
-    allow_methods=["POST", "GET"],
+    allow_origins=["*"],   # locked to your frontend URL from .env
+    allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
 
+
 @app.post("/ask-ai")
 def ask_ai_endpoint(request: QuestionRequest):
-    """
-    Receives a question, retrieves context from the vector DB,
-    and returns an AI-generated answer.
-    """
-    
-    print("ask_ai_endpoint")
+    print(f"ask_ai_endpoint | policy={request.policy_number}")
     answer = ask_ai(request.question, request.policy_number)
     return {"answer": answer}
 
-@app.get("/policy/{policy_number}")
-def get_policy_endpoint(policy_number: str):
-    policy = get_policy(policy_number)
+
+@app.get("/policy/{contract_reference}")
+def get_policy_endpoint(contract_reference: str):
+    policy = get_policy(contract_reference)
     if not policy:
         raise HTTPException(status_code=404, detail="Policy not found")
     return policy
+
 
 @app.get("/health")
 def health_check():

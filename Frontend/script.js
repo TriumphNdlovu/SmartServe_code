@@ -1,4 +1,4 @@
-const API_BASE = "http://localhost:8000";
+const API_BASE = CONFIG.BACKEND_URL;
 
 // Holds the contract reference for the current session
 let currentPolicyNumber = null;
