@@ -1,6 +1,7 @@
 import os
 import re
 import requests
+from typing import List
 from dotenv import load_dotenv
 from rag.retriever import retrieve_context
 from services.policy_service import get_policy
@@ -18,8 +19,8 @@ def clean_response(text: str) -> str:
     return text.strip()
 
 
-def ask_ai(question: str, policy_number: str) -> str:
-    # print(f"ask_ai | model={GROQ_MODEL} | policy={policy_number} | question={question}")
+def ask_ai(question: str, policy_number: str, history: List[dict] = []) -> str:
+    print(f"ask_ai | model={GROQ_MODEL} | policy={policy_number} | turns={len(history)}")
 
     if not GROQ_API_KEY:
         return "AI service is not configured. Please set GROQ_API_KEY in your .env file."
@@ -29,32 +30,30 @@ def ask_ai(question: str, policy_number: str) -> str:
 
     print(f"retrieved context: {context_text}")
 
+   
     system_prompt = (
         "You are a helpful assistant for a life insurance self-service portal. "
         "You are speaking directly with the policyholder. "
-        "Answer clearly and concisely using only the information provided. "
+        "Answer clearly and concisely using only the information provided below. "
         "If you cannot find the answer, say: "
-        "\"I'm sorry, I don't have that information in your policy documents.\""
+        "\"I'm sorry, I don't have that information in your policy documents.\"\n\n"
+        f"POLICY DATA:\n{policy_json}\n\n"
+        f"SUPPORTING DOCUMENTS:\n{context_text}"
     )
 
-    user_prompt = f"""Here is the policyholder's information:
+   
+    messages = [{"role": "system", "content": system_prompt}]
 
-        POLICY DATA:
-        {policy_json}
+    # Append conversation history (previous turns)
+    for turn in history:
+        messages.append({"role": turn["role"], "content": turn["content"]})
 
-        SUPPORTING DOCUMENTS:
-        {context_text}
-
-        QUESTION: {question}
-
-        Answer the question using only the information above. Be direct and concise."""
+    # Append the current question as the latest user message
+    messages.append({"role": "user", "content": question})
 
     payload = {
         "model": GROQ_MODEL,
-        "messages": [
-            {"role": "system", "content": system_prompt},
-            {"role": "user",   "content": user_prompt},
-        ],
+        "messages": messages,
         "temperature": 0.1,
         "max_tokens":  400,
     }

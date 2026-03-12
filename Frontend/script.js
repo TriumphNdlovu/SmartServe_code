@@ -1,7 +1,13 @@
-const API_BASE = CONFIG.BACKEND_URL;
+const API_BASE = (typeof CONFIG !== "undefined" && CONFIG.BACKEND_URL)
+  ? CONFIG.BACKEND_URL
+  : "http://localhost:8000";
 
 // Holds the contract reference for the current session
 let currentPolicyNumber = null;
+
+// Conversation history — sent to backend with every message
+// Each entry: { role: "user" | "assistant", content: "..." }
+let conversationHistory = [];
 
 // ─── Status helpers ───────────────────────────────────────────────────────
 
@@ -114,9 +120,10 @@ function logout() {
   currentPolicyNumber = null;
   document.getElementById("mainApp").classList.add("hidden");
   document.getElementById("loginScreen").classList.remove("hidden");
-  document.getElementById("contractRef").value  = "";
-  document.getElementById("password").value     = "";
+  document.getElementById("contractRef").value    = "";
+  document.getElementById("password").value       = "";
   document.getElementById("loginError").innerText = "";
+  conversationHistory = [];
   document.getElementById("chatMessages").innerHTML = `
     <div class="bot-message">
       <div class="bot-bubble">Hello 👋 I'm your AI insurance assistant. Ask me about your cover, benefits, premiums, or claims.</div>
@@ -245,6 +252,9 @@ async function sendMessage() {
   input.disabled = true;
   document.querySelector(".send-btn").disabled = true;
 
+  // Add user message to history before sending
+  conversationHistory.push({ role: "user", content: message });
+
   appendUserMessage(message);
   const loadingEl = appendBotMessage("", true);
 
@@ -255,17 +265,29 @@ async function sendMessage() {
       body: JSON.stringify({
         question:      message,
         policy_number: currentPolicyNumber,
+        history:       conversationHistory.slice(0, -1), // send history excluding current message
       }),
     });
 
     if (!response.ok) throw new Error(`Server error: ${response.status}`);
 
     const data = await response.json();
+
+    // Add assistant response to history
+    conversationHistory.push({ role: "assistant", content: data.answer });
+
+    // Keep history from growing too large (last 20 messages = 10 exchanges)
+    if (conversationHistory.length > 20) {
+      conversationHistory = conversationHistory.slice(-20);
+    }
+
     loadingEl.classList.remove("loading");
     loadingEl.querySelector(".bot-bubble").innerText = data.answer;
 
   } catch (err) {
     console.error("AI request failed:", err);
+    // Remove the failed user message from history
+    conversationHistory.pop();
     loadingEl.classList.remove("loading");
     loadingEl.querySelector(".bot-bubble").innerText =
       "Sorry, I couldn't reach the assistant right now. Please try again.";

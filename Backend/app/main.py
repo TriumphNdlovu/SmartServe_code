@@ -17,7 +17,7 @@ app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],   # locked to your frontend URL from .env
+    allow_origins=["*"], 
     allow_methods=["GET", "POST"],
     allow_headers=["Content-Type"],
 )
@@ -25,8 +25,8 @@ app.add_middleware(
 
 @app.post("/ask-ai")
 def ask_ai_endpoint(request: QuestionRequest):
-    print(f"ask_ai_endpoint | policy={request.policy_number}")
-    answer = ask_ai(request.question, request.policy_number)
+    print(f"ask_ai_endpoint | policy={request.policy_number} | history={len(request.history)} turns")
+    answer = ask_ai(request.question, request.policy_number, [h.dict() for h in request.history])
     return {"answer": answer}
 
 
