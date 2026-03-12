@@ -1,4 +1,6 @@
-const API_BASE = "http://127.0.0.1:8000"; // I will change this once we go live
+const API_BASE = "http://localhost:8000"; // I will change this once we go live, sorry guys
+
+// ─── Auth ────────────────────────────────────────────────────────────────────
 
 function login() {
   const contract = document.getElementById("contractRef").value.trim();
@@ -24,48 +26,48 @@ function logout() {
   document.getElementById("password").value = "";
 }
 
-function showSection(sectionId, buttonElement) {
-  const sections = document.querySelectorAll(".section-view");
-  sections.forEach(section => section.classList.add("hidden"));
+// ─── Navigation ──────────────────────────────────────────────────────────────
 
+function showSection(sectionId, buttonElement) {
+  document.querySelectorAll(".section-view").forEach(s => s.classList.add("hidden"));
   document.getElementById(sectionId).classList.remove("hidden");
 
-  const menuItems = document.querySelectorAll(".menu-item");
-  menuItems.forEach(item => item.classList.remove("active"));
-
-  if (buttonElement) {
-    buttonElement.classList.add("active");
-  }
+  document.querySelectorAll(".menu-item").forEach(i => i.classList.remove("active"));
+  if (buttonElement) buttonElement.classList.add("active");
 }
 
 function prefillMessage(text) {
   showSection("chatSection", document.querySelectorAll(".menu-item")[1]);
   document.getElementById("messageInput").value = text;
+  document.getElementById("messageInput").focus();
+}
+
+// ─── Chat ─────────────────────────────────────────────────────────────────────
+
+function appendMessage(text, className) {
+  const chat = document.getElementById("chatMessages");
+  const msg = document.createElement("div");
+  msg.className = className;
+  msg.innerText = text;
+  chat.appendChild(msg);
+  chat.scrollTop = chat.scrollHeight;
+  return msg;
 }
 
 async function sendMessage() {
   const input = document.getElementById("messageInput");
   const message = input.value.trim();
-
   if (message === "") return;
 
-  const chat = document.getElementById("chatMessages");
-
-  // Append user message
-  const userMsg = document.createElement("div");
-  userMsg.className = "user-message";
-  userMsg.innerText = message;
-  chat.appendChild(userMsg);
-
+  // Disable input while waiting
   input.value = "";
-  chat.scrollTop = chat.scrollHeight;
+  input.disabled = true;
+  document.querySelector(".chat-input-row button").disabled = true;
 
-  // Show a loading indicator while waiting for the backend
-  const loadingMsg = document.createElement("div");
-  loadingMsg.className = "bot-message";
-  loadingMsg.innerText = "Thinking…";
-  chat.appendChild(loadingMsg);
-  chat.scrollTop = chat.scrollHeight;
+  appendMessage(message, "user-message");
+
+  // Loading indicator
+  const loadingMsg = appendMessage("Thinking…", "bot-message loading");
 
   try {
     const response = await fetch(`${API_BASE}/ask-ai`, {
@@ -75,25 +77,33 @@ async function sendMessage() {
     });
 
     if (!response.ok) {
-      throw new Error(`Server error: ${response.status}`);
+      throw new Error(`Server responded with status ${response.status}`);
     }
 
     const data = await response.json();
     loadingMsg.innerText = data.answer;
+    loadingMsg.classList.remove("loading");
+
   } catch (err) {
     console.error("AI request failed:", err);
-    loadingMsg.innerText =
-      "Sorry, I couldn't reach the server. Please try again.";
+    loadingMsg.innerText = "Sorry, I couldn't reach the assistant. Please try again.";
+    loadingMsg.classList.remove("loading");
+  } finally {
+    // Re-enable input
+    input.disabled = false;
+    document.querySelector(".chat-input-row button").disabled = false;
+    input.focus();
   }
 
-  chat.scrollTop = chat.scrollHeight;
+  document.getElementById("chatMessages").scrollTop =
+    document.getElementById("chatMessages").scrollHeight;
 }
 
-document.addEventListener("keydown", function (event) {
-  const activeInput = document.getElementById("messageInput");
-  if (!activeInput) return;
+// ─── Keyboard shortcut ───────────────────────────────────────────────────────
 
-  if (event.key === "Enter" && document.activeElement === activeInput) {
+document.addEventListener("keydown", function (event) {
+  const input = document.getElementById("messageInput");
+  if (input && event.key === "Enter" && document.activeElement === input) {
     sendMessage();
   }
 });

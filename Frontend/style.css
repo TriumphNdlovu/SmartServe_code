@@ -347,3 +347,8 @@ body {
     max-width: 90%;
   }
 }
+
+.bot-message.loading {  
+  opacity: 0.6;
+  font-style: italic;
+}

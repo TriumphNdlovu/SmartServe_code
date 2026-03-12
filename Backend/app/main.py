@@ -13,8 +13,8 @@ app = FastAPI()
 app.add_middleware( # I will make the cors more strict later guys relax
     CORSMiddleware,
     allow_origins=["*"],  
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["POST", "GET"],
+    allow_headers=["Content-Type"],
 )
 
 @app.post("/ask-ai")
@@ -23,7 +23,7 @@ def ask_ai_endpoint(request: QuestionRequest):
     Receives a question, retrieves context from the vector DB,
     and returns an AI-generated answer.
     """
-    # ask_ai will internally call retrieve_context -> search()
+    
     print("ask_ai_endpoint")
     answer = ask_ai(request.question)
     return {"answer": answer}
