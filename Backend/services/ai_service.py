@@ -1,49 +1,66 @@
+import re
 import requests
 from rag.retriever import retrieve_context
 from services.policy_service import get_policy
 
 OLLAMA_URL = "http://localhost:11434/api/chat"
+MODEL      = "gemma3:4b"
 
-def ask_ai(question, policy_number):
 
-    print(f"ask_ai: {question}")
+def clean_response(text: str) -> str:
+    """Strip <think>...</think> blocks if present."""
+    text = re.sub(r"<think>.*?</think>", "", text, flags=re.DOTALL)
+    return text.strip()
 
-    # Get relevant context from your vector DB
-    context = retrieve_context(question)
-    context_text = context if context else "No context available."
 
-    # Get policy JSON for the user
-    policy_json = get_policy(policy_number)
+def ask_ai(question: str, policy_number: str) -> str:
+    print(f"ask_ai | model={MODEL} | policy={policy_number} | question={question}")
 
-    print(f"retrieved Context: {context_text}")
+    context_text = retrieve_context(question) or "No relevant documents found."
+    policy_json  = get_policy(policy_number)
 
-    prompt = f"""
-            You are an assistant for a self-service insurance portal. Answer questions using ONLY the information provided in the context below. 
-            Do not guess or provide information that is not in the context. 
-            If the answer cannot be retrieved from the context or policy details, respond politely: "I'm sorry, I don't have that information in your policy documents".
+    print(f"retrieved context: {context_text}")
 
-            User: Policy holder
-            
-            Question: {question}
+    system_prompt = (
+        "You are a helpful assistant for a life insurance self-service portal. "
+        "You are speaking directly with the policyholder. "
+        "Answer clearly and concisely using only the information provided. "
+        "If you cannot find the answer, say: "
+        "\"I'm sorry, I don't have that information in your policy documents, Please call customer care on 082 779 3863\""
+    )
 
-            Context and Policy details:
-            Context: {context_text}
-            Policy: {policy_json}
+    user_prompt = f"""Here is the policyholder's information:
 
-            Answer:
-            """
+        POLICY DATA:
+        {policy_json}
+
+        SUPPORTING DOCUMENTS:
+        {context_text}
+
+        QUESTION: {question}
+
+        Answer the question using only the information above. Be direct and concise."""
 
     payload = {
-        "model": "gemma3:4b",
+        "model": MODEL,
         "messages": [
-            {"role": "user", "content": prompt}
+            {"role": "system", "content": system_prompt},
+            {"role": "user",   "content": user_prompt}
         ],
-        "stream": False
+        "stream": False,
+        "options": {
+            "temperature": 0.1,
+            "num_predict": 300, 
+        }
     }
 
-    response = requests.post(OLLAMA_URL, json=payload)
+    response = requests.post(OLLAMA_URL, json=payload, timeout=120)
 
     if response.status_code != 200:
         return f"Error contacting AI SmartServe: {response.text}"
 
-    return response.json()["message"]["content"]
+    raw    = response.json()["message"]["content"]
+    answer = clean_response(raw)
+
+    print(f"answer: {answer}")
+    return answer
