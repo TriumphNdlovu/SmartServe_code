@@ -4,14 +4,18 @@ from pydantic import BaseModel
 from rag.vector_store import load_index, search
 from rag.schemas import QuestionRequest
 from services.ai_service import ask_ai  # or wherever your ask_ai is
+from fastapi.middleware.cors import CORSMiddleware
 
-# ------------------------
-# Load the vector DB at startup
-# ------------------------
 load_index()  # loads FAISS index and documents from disk if they exist
 
 app = FastAPI()
 
+app.add_middleware( # I will make the cors more strict later guys relax
+    CORSMiddleware,
+    allow_origins=["*"],  
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/ask-ai")
 def ask_ai_endpoint(request: QuestionRequest):
@@ -26,4 +30,4 @@ def ask_ai_endpoint(request: QuestionRequest):
 
 @app.get("/health")
 def health_check():
-    return {"status": "ok"}
+    return {"status": "200 Ok"}
