@@ -201,6 +201,44 @@ function renderBenefits(benefits) {
   }).join("");
 }
 
+// ─── Mobile sidebar ───────────────────────────────────────────────────────
+
+function toggleSidebar() {
+  const sidebar   = document.querySelector(".sidebar");
+  const overlay   = document.getElementById("sidebarOverlay");
+  const hamburger = document.getElementById("hamburgerBtn");
+  const isOpen    = sidebar.classList.contains("is-open");
+
+  if (isOpen) {
+    closeSidebar();
+  } else {
+    overlay.style.display = "block";
+    // Small delay so display:block is painted before opacity transition kicks in
+    requestAnimationFrame(() => {
+      sidebar.classList.add("is-open");
+      overlay.classList.add("is-visible");
+      hamburger.classList.add("is-open");
+    });
+    document.body.style.overflow = "hidden";
+  }
+}
+
+function closeSidebar() {
+  const sidebar   = document.querySelector(".sidebar");
+  const overlay   = document.getElementById("sidebarOverlay");
+  const hamburger = document.getElementById("hamburgerBtn");
+
+  sidebar.classList.remove("is-open");
+  overlay.classList.remove("is-visible");
+  hamburger.classList.remove("is-open");
+  document.body.style.overflow = "";
+
+  // Hide overlay after fade-out transition completes
+  overlay.addEventListener("transitionend", () => {
+    overlay.style.display = "none";
+  }, { once: true });
+}
+
 // ─── Navigation ───────────────────────────────────────────────────────────
 
 function showSection(sectionId, buttonElement) {
@@ -381,5 +419,8 @@ document.addEventListener("keydown", function (event) {
   const input = document.getElementById("messageInput");
   if (input && event.key === "Enter" && document.activeElement === input) {
     sendMessage();
+  }
+  if (event.key === "Escape") {
+    closeSidebar();
   }
 });

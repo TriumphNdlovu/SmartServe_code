@@ -942,15 +942,104 @@ body {
 
 /* ─── Benefits list items need align-items: flex-start ───────────────────── */
 .benefits-list li { align-items: flex-start; }
+/* ─── Hamburger button ───────────────────────────────────────────────────── */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  padding: 6px;
+  border: none;
+  border-radius: var(--radius-sm);
+  background: var(--surface-2);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background var(--transition);
+}
+
+.hamburger:hover { background: var(--border); }
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 2px;
+  transition: transform 0.25s ease, opacity 0.25s ease;
+  transform-origin: center;
+}
+
+/* Animate into X when open */
+.hamburger.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.is-open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ─── Sidebar overlay ────────────────────────────────────────────────────── */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 40;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+  pointer-events: none;
+}
+
+.sidebar-overlay.is-visible {
+  opacity: 1;
+  pointer-events: all;
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
 @media (max-width: 1024px) {
   .cards-grid { grid-template-columns: 1fr 1fr; }
 }
 
 @media (max-width: 768px) {
+  /* Login */
   .login-screen { grid-template-columns: 1fr; }
   .login-left { display: none; }
+
+  /* App layout — single column, sidebar overlays */
   .main-app { grid-template-columns: 1fr; }
-  .sidebar { display: none; }
+
+  /* Sidebar becomes a fixed drawer */
+  .sidebar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    width: 280px;
+    z-index: 50;
+    transform: translateX(-100%);
+    transition: transform 0.28s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 4px 0 24px rgba(0,0,0,0.3);
+  }
+
+  .sidebar.is-open { transform: translateX(0); }
+
+  /* Show overlay on mobile */
+  .sidebar-overlay { display: block; }
+
+  /* Show hamburger */
+  .hamburger { display: flex; }
+
+  /* Topbar left wraps nicely with hamburger */
+  .topbar-left {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .topbar-left h3 { font-size: 16px; margin-bottom: 0; }
+  .topbar-left p  { display: none; }
+
+  /* Content */
   .cards-grid, .panel-grid, .quick-actions { grid-template-columns: 1fr; }
   .content-area { padding: 16px; }
   .chat-wrapper { height: calc(100vh - 140px); }
