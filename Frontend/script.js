@@ -216,7 +216,29 @@ function prefillMessage(text) {
   document.getElementById("messageInput").focus();
 }
 
-// ─── Chat ─────────────────────────────────────────────────────────────────
+// ─── Typing effect ────────────────────────────────────────────────────────
+
+function typeMessage(element, text, speed = 18) {
+  return new Promise(resolve => {
+    let i = 0;
+    element.innerText = "";
+
+    function tick() {
+      if (i < text.length) {
+        element.innerText += text[i];
+        i++;
+        // Scroll chat as text grows
+        const chat = document.getElementById("chatMessages");
+        chat.scrollTop = chat.scrollHeight;
+        setTimeout(tick, speed);
+      } else {
+        resolve();
+      }
+    }
+
+    tick();
+  });
+}
 
 function appendBotMessage(content, isLoading = false) {
   const chat    = document.getElementById("chatMessages");
@@ -320,7 +342,13 @@ async function sendMessage() {
 
     const data = await response.json();
 
-    // Add assistant response to history
+    // Swap robot out, type the answer in
+    loadingEl.classList.remove("loading");
+    const bubble = loadingEl.querySelector(".bot-bubble");
+    bubble.innerHTML = "";
+    await typeMessage(bubble, data.answer);
+
+    // Add assistant response to history only after fully typed
     conversationHistory.push({ role: "assistant", content: data.answer });
 
     // Keep history from growing too large (last 20 messages = 10 exchanges)
