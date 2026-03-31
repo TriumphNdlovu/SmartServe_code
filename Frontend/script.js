@@ -224,10 +224,57 @@ function appendBotMessage(content, isLoading = false) {
   wrapper.className = "bot-message" + (isLoading ? " loading" : "");
   const bubble  = document.createElement("div");
   bubble.className = "bot-bubble";
-  bubble.innerHTML = isLoading
-    ? `<div class="dot-loader"><span></span><span></span><span></span></div>`
-    : "";
-  if (!isLoading) bubble.innerText = content;
+
+  if (isLoading) {
+    bubble.innerHTML = `
+      <div class="robot-loader">
+        <svg class="robot-svg" width="40" height="64" viewBox="0 0 40 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Antenna -->
+          <line x1="20" y1="4" x2="20" y2="10" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round"/>
+          <circle class="robot-antenna-ball" cx="20" cy="3" r="3" fill="#0ea5e9"/>
+
+          <!-- Head -->
+          <g class="robot-head">
+            <rect x="8" y="10" width="24" height="18" rx="4" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+            <!-- Eyes -->
+            <circle class="robot-eye left"  cx="14" cy="19" r="3" fill="#0ea5e9"/>
+            <circle class="robot-eye right" cx="26" cy="19" r="3" fill="#0ea5e9"/>
+            <!-- Eye shine -->
+            <circle cx="15" cy="18" r="1" fill="white" opacity="0.8"/>
+            <circle cx="27" cy="18" r="1" fill="white" opacity="0.8"/>
+          </g>
+
+          <!-- Neck -->
+          <rect x="17" y="28" width="6" height="3" rx="1" fill="#0ea5e9" opacity="0.6"/>
+
+          <!-- Body -->
+          <rect x="6" y="31" width="28" height="20" rx="5" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+          <!-- Chest screen -->
+          <rect x="12" y="35" width="16" height="10" rx="2" fill="#0ea5e9" opacity="0.15" stroke="#0ea5e9" stroke-width="1"/>
+          <!-- Mouth/screen flicker lines -->
+          <line class="robot-mouth" x1="15" y1="39" x2="25" y2="39" stroke="#0ea5e9" stroke-width="1.5" stroke-linecap="round"/>
+          <line class="robot-mouth" x1="17" y1="42" x2="23" y2="42" stroke="#0ea5e9" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+
+          <!-- Left arm -->
+          <rect class="robot-arm-left"  x="0" y="31" width="6" height="14" rx="3" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+          <!-- Right arm -->
+          <rect class="robot-arm-right" x="34" y="31" width="6" height="14" rx="3" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+
+          <!-- Left leg -->
+          <rect class="robot-leg-left"  x="10" y="51" width="8" height="14" rx="3" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+          <!-- Right leg -->
+          <rect class="robot-leg-right" x="22" y="51" width="8" height="14" rx="3" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="1.5"/>
+
+          <!-- Feet -->
+          <rect x="8"  y="62" width="12" height="5" rx="2.5" fill="#0ea5e9" opacity="0.7"/>
+          <rect x="20" y="62" width="12" height="5" rx="2.5" fill="#0ea5e9" opacity="0.7"/>
+        </svg>
+        <span class="robot-loader-text">Thinking…</span>
+      </div>`;
+  } else {
+    bubble.innerText = content;
+  }
+
   wrapper.appendChild(bubble);
   chat.appendChild(wrapper);
   chat.scrollTop = chat.scrollHeight;
