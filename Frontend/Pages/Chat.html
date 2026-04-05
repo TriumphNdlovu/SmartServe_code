@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartServe — Chat Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../Style/chat.css">
+  <link rel="stylesheet" href="../Style/base.css">
+  <link rel="stylesheet" href="../Style/layout.css">
+  <link rel="stylesheet" href="../Style/sidebar.css">
+
+
+</head>
+<body>
+  <div class="app-container">
+    <section class="main-app">
+      <div id="sidebarMount"></div>
+      <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+
+      <main class="content-area">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleSidebar()" aria-label="Open menu">
+              <span></span><span></span><span></span>
+            </button>
+            <div>
+              <h3>Welcome back, <span id="clientName">—</span></h3>
+              <p id="contractDisplay">—</p>
+            </div>
+          </div>
+          <div class="topbar-right">
+            <div id="statusPill" class="status-pill status-green">
+              <span class="status-dot"></span> —
+            </div>
+          </div>
+        </header>
+
+        <div class="chat-wrapper">
+          <div class="chat-header">
+            <div class="chat-avatar">
+              <svg width="22" height="28" viewBox="0 0 40 52" fill="none">
+                <line x1="20" y1="2" x2="20" y2="7" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <circle cx="20" cy="1.5" r="2" fill="white" opacity="0.9"/>
+                <rect x="8" y="7" width="24" height="16" rx="4" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5"/>
+                <circle cx="14" cy="15" r="2.5" fill="white"/>
+                <circle cx="26" cy="15" r="2.5" fill="white"/>
+                <circle cx="14.8" cy="14.2" r="0.9" fill="rgba(14,165,233,0.9)"/>
+                <circle cx="26.8" cy="14.2" r="0.9" fill="rgba(14,165,233,0.9)"/>
+                <rect x="17" y="23" width="6" height="3" rx="1" fill="white" opacity="0.5"/>
+                <rect x="6" y="26" width="28" height="18" rx="5" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5"/>
+                <rect x="12" y="30" width="16" height="8" rx="2" fill="white" fill-opacity="0.1" stroke="white" stroke-width="1"/>
+                <line x1="15" y1="34" x2="25" y2="34" stroke="white" stroke-width="1.5" stroke-linecap="round"/>
+                <rect x="0" y="27" width="6" height="11" rx="3" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5"/>
+                <rect x="34" y="27" width="6" height="11" rx="3" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5"/>
+                <rect x="10" y="44" width="8" height="7" rx="3" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5"/>
+                <rect x="22" y="44" width="8" height="7" rx="3" fill="white" fill-opacity="0.2" stroke="white" stroke-width="1.5"/>
+              </svg>
+            </div>
+            <div>
+              <div class="chat-agent-name">AI Assistant</div>
+              <div class="chat-agent-status"><span class="status-dot small"></span> Online</div>
+            </div>
+          </div>
+
+          <div id="chatMessages" class="chat-messages">
+            <div class="bot-message">
+              <div class="bot-bubble">Hello 👋 I'm your AI life insurance assistant. Ask me about your death benefit, disability cover, dread disease, income protection, premiums, or beneficiary details.</div>
+            </div>
+          </div>
+
+          <div class="chat-input-row">
+            <input id="messageInput" type="text" placeholder="Ask about your life cover, benefits, or claims…">
+            <button onclick="sendMessage()" class="send-btn">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M13.5 8H2.5M9.5 4L13.5 8L9.5 12" stroke="white" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </button>
+          </div>
+        </div>
+      </main>
+    </section>
+  </div>
+
+  <script src="../../Config.js"></script>
+  <script src="../Scripts/Shared.js"></script>
+  <script src="../Scripts/chat.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartServe — Claims</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style/claims.css">
+  <link rel="stylesheet" href="../Style/base.css">
+  <link rel="stylesheet" href="../Style/layout.css">
+  <link rel="stylesheet" href="../Style/sidebar.css">
+</head>
+<body>
+  <div class="app-container">
+    <section class="main-app">
+      <div id="sidebarMount"></div>
+      <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+ 
+      <main class="content-area">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleSidebar()" aria-label="Open menu">
+              <span></span><span></span><span></span>
+            </button>
+            <div>
+              <h3>Welcome back, <span id="clientName">—</span></h3>
+              <p id="contractDisplay">—</p>
+            </div>
+          </div>
+          <div class="topbar-right">
+            <div id="statusPill" class="status-pill status-green">
+              <span class="status-dot"></span> —
+            </div>
+          </div>
+        </header>
+ 
+        <div class="panel">
+          <div class="panel-header">
+            <h4>Claims Overview</h4>
+            <span class="panel-badge" id="claimsBadge">—</span>
+          </div>
+          <table class="claims-table">
+            <thead>
+              <tr>
+                <th>Claim Number</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Date</th>
+              </tr>
+            </thead>
+            <tbody id="claimsBody">
+              <tr><td colspan="4" style="color:var(--text-muted);font-style:italic;padding:20px 14px;">Loading claims…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </main>
+    </section>
+  </div>
+ 
+  <script src="../../config.js"></script>
+  <script src="../Scripts/shared.js"></script>
+  <script src="../Scripts/claims.js"></script>
+</body>
+</html>

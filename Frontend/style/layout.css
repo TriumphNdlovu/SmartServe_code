@@ -1,0 +1,48 @@
+/* ─── Main app layout ────────────────────────────────────────────────────── */
+.main-app {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  min-height: 100vh;
+}
+
+/* ─── Content area ───────────────────────────────────────────────────────── */
+.content-area { padding: 24px; overflow-y: auto; }
+
+/* ─── Topbar ─────────────────────────────────────────────────────────────── */
+.topbar {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 18px 24px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  margin-bottom: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.topbar-left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+}
+
+.topbar-left h3 {
+  font-family: var(--font-display);
+  font-size: 20px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 2px;
+  letter-spacing: -0.2px;
+}
+
+.topbar-left p { font-size: 13px; color: var(--text-muted); }
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .main-app { grid-template-columns: 1fr; }
+  .content-area { padding: 16px; }
+  .topbar-left h3 { font-size: 16px; margin-bottom: 0; }
+  .topbar-left p  { display: none; }
+}
