@@ -1,0 +1,248 @@
+/* ─── Chat wrapper ───────────────────────────────────────────────────────── */
+.chat-wrapper {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 160px);
+  overflow: hidden;
+}
+
+/* ─── Chat header ────────────────────────────────────────────────────────── */
+.chat-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.chat-avatar {
+  width: 38px;
+  height: 38px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.chat-agent-name { font-size: 14px; font-weight: 500; color: var(--text-primary); }
+
+.chat-agent-status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--green);
+  margin-top: 1px;
+}
+
+/* ─── Messages area ──────────────────────────────────────────────────────── */
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-track { background: transparent; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 2px; }
+
+/* ─── Bot message ────────────────────────────────────────────────────────── */
+.bot-message { display: flex; align-items: flex-start; gap: 10px; }
+
+.bot-bubble {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 4px 16px 16px 16px;
+  padding: 12px 16px;
+  font-size: 14px;
+  color: var(--text-primary);
+  line-height: 1.6;
+  max-width: 75%;
+  white-space: pre-wrap;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Loading state */
+.bot-message.loading .bot-bubble {
+  background: transparent;
+  border-color: transparent;
+  box-shadow: none;
+  padding: 8px 12px;
+}
+
+/* ─── User message ───────────────────────────────────────────────────────── */
+.user-message {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.user-message {
+  background: var(--accent);
+  color: white;
+  border-radius: 16px 4px 16px 16px;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 75%;
+  align-self: flex-end;
+}
+
+/* ─── Dancing robot loader ───────────────────────────────────────────────── */
+.robot-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 4px;
+}
+
+.robot-loader-text {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-style: italic;
+  letter-spacing: 0.3px;
+}
+
+.robot-svg {
+  overflow: visible;
+  animation: robot-bob 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes robot-bob {
+  from { transform: translateY(0px); }
+  to   { transform: translateY(-5px); }
+}
+
+.robot-head {
+  transform-origin: 20px 14px;
+  animation: robot-nod 1.2s ease-in-out infinite alternate;
+}
+@keyframes robot-nod {
+  from { transform: rotate(-4deg); }
+  to   { transform: rotate(4deg); }
+}
+
+.robot-antenna-ball {
+  animation: antenna-glow 0.6s ease-in-out infinite alternate;
+}
+@keyframes antenna-glow {
+  from { opacity: 0.4; r: 2.5px; }
+  to   { opacity: 1;   r: 3.5px; }
+}
+
+.robot-eye {
+  animation: eye-blink 3s ease-in-out infinite;
+  transform-origin: center;
+}
+.robot-eye.right { animation-delay: 0.15s; }
+@keyframes eye-blink {
+  0%, 88%, 100% { transform: scaleY(1); }
+  92%           { transform: scaleY(0.1); }
+}
+
+.robot-arm-left {
+  transform-origin: 6px 32px;
+  animation: arm-left 0.6s ease-in-out infinite alternate;
+}
+@keyframes arm-left {
+  from { transform: rotate(-30deg); }
+  to   { transform: rotate(20deg); }
+}
+
+.robot-arm-right {
+  transform-origin: 34px 32px;
+  animation: arm-right 0.6s ease-in-out infinite alternate;
+}
+@keyframes arm-right {
+  from { transform: rotate(30deg); }
+  to   { transform: rotate(-20deg); }
+}
+
+.robot-leg-left {
+  transform-origin: 14px 52px;
+  animation: leg-left 0.6s ease-in-out infinite alternate;
+}
+.robot-leg-right {
+  transform-origin: 26px 52px;
+  animation: leg-right 0.6s ease-in-out infinite alternate;
+}
+@keyframes leg-left {
+  from { transform: translateY(0); }
+  to   { transform: translateY(3px); }
+}
+@keyframes leg-right {
+  from { transform: translateY(3px); }
+  to   { transform: translateY(0); }
+}
+
+.robot-mouth {
+  animation: mouth-flicker 0.4s step-end infinite;
+}
+@keyframes mouth-flicker {
+  0%,100% { opacity: 1; }
+  50%     { opacity: 0.5; }
+}
+
+/* ─── Input row ──────────────────────────────────────────────────────────── */
+.chat-input-row {
+  padding: 16px 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  background: var(--surface);
+}
+
+.chat-input-row input {
+  flex: 1;
+  padding: 12px 16px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: 999px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--surface-2);
+  outline: none;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+
+.chat-input-row input:focus {
+  border-color: var(--accent);
+  background: var(--surface);
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.1);
+}
+
+.chat-input-row input::placeholder { color: var(--text-muted); }
+
+.send-btn {
+  width: 44px;
+  height: 44px;
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: background var(--transition), transform var(--transition);
+}
+
+.send-btn:hover  { background: var(--accent-hover); transform: scale(1.05); }
+.send-btn:active { transform: scale(0.97); }
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .chat-wrapper { height: calc(100vh - 140px); }
+  .bot-bubble, .user-message { max-width: 90%; }
+}

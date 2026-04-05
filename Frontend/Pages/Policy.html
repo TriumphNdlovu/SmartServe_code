@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartServe — Policy</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style/policy.css">
+  <link rel="stylesheet" href="../Style/base.css">
+  <link rel="stylesheet" href="../Style/layout.css">
+  <link rel="stylesheet" href="../Style/sidebar.css">
+</head>
+<body>
+  <div class="app-container">
+    <section class="main-app">
+      <div id="sidebarMount"></div>
+      <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+ 
+      <main class="content-area">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleSidebar()" aria-label="Open menu">
+              <span></span><span></span><span></span>
+            </button>
+            <div>
+              <h3>Welcome back, <span id="clientName">—</span></h3>
+              <p id="contractDisplay">—</p>
+            </div>
+          </div>
+          <div class="topbar-right">
+            <div id="statusPill" class="status-pill status-green">
+              <span class="status-dot"></span> —
+            </div>
+          </div>
+        </header>
+ 
+        <div class="cards-grid">
+          <div class="info-card card-blue">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 6V11C18 15 14.5 18.5 10 19C5.5 18.5 2 15 2 11V6L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="card-label">Plan</span>
+            <h4 id="polPlanName">—</h4>
+            <p>Your active cover package.</p>
+          </div>
+          <div class="info-card card-teal">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 4V3M14 4V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 9H18" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <span class="card-label">Monthly Premium</span>
+            <h4 id="polPremium">—</h4>
+            <p id="polCollectionDay">Monthly debit order.</p>
+          </div>
+          <div class="info-card card-green">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M6.5 10L9 12.5L13.5 8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="card-label">Cover Period</span>
+            <h4 id="polStartDate">—</h4>
+            <p>Matures: <span id="polEndDate">—</span></p>
+          </div>
+        </div>
+ 
+        <div class="panel-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <h4>Benefits</h4>
+              <span class="badge badge-active">Active</span>
+            </div>
+            <ul class="benefits-list" id="benefitsList"><li>Loading…</li></ul>
+          </div>
+          <div class="panel">
+            <div class="panel-header">
+              <h4>Beneficiaries</h4>
+              <span class="badge badge-active">On record</span>
+            </div>
+            <ul class="benefits-list" id="beneficiariesList"><li>Loading…</li></ul>
+          </div>
+        </div>
+      </main>
+    </section>
+  </div>
+ 
+  <script src="../../config.js"></script>
+  <script src="../Scripts/shared.js"></script>
+  <script src="../Scripts/policy.js"></script>
+</body>
+</html>

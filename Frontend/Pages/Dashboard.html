@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartServe — Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style/dashboard.css">
+  <link rel="stylesheet" href="../style/base.css">
+  <link rel="stylesheet" href="../style/layout.css">
+  <link rel="stylesheet" href="../style/sidebar.css">
+  
+</head>
+<body>
+  <div class="app-container">
+    <section class="main-app">
+ 
+      <!-- Sidebar injected here by shared.js -->
+      <div id="sidebarMount"></div>
+ 
+      <!-- Mobile overlay -->
+      <div id="sidebarOverlay" class="sidebar-overlay" onclick="closeSidebar()"></div>
+ 
+      <main class="content-area">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button class="hamburger" id="hamburgerBtn" onclick="toggleSidebar()" aria-label="Open menu">
+              <span></span><span></span><span></span>
+            </button>
+            <div>
+              <h3>Welcome back, <span id="clientName">—</span></h3>
+              <p id="contractDisplay">—</p>
+            </div>
+          </div>
+          <div class="topbar-right">
+            <div id="statusPill" class="status-pill status-green">
+              <span class="status-dot"></span> —
+            </div>
+          </div>
+        </header>
+ 
+        <div class="cards-grid">
+          <div class="info-card card-blue">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 2L18 6V11C18 15 14.5 18.5 10 19C5.5 18.5 2 15 2 11V6L10 2Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="card-label">Policy Type</span>
+            <h4 id="dashPolicyType">—</h4>
+            <p>Your active life cover plan.</p>
+          </div>
+          <div class="info-card card-teal">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><rect x="2" y="4" width="16" height="13" rx="2" stroke="currentColor" stroke-width="1.5"/><path d="M6 4V3M14 4V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M2 9H18" stroke="currentColor" stroke-width="1.5"/></svg>
+            </div>
+            <span class="card-label">Monthly Premium</span>
+            <h4 id="dashPremium">—</h4>
+            <p>Next debit order scheduled.</p>
+          </div>
+          <div class="info-card card-amber">
+            <div class="card-icon">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8" stroke="currentColor" stroke-width="1.5"/><path d="M10 6V10L13 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+            <span class="card-label">Policy Status</span>
+            <h4 id="dashStatus" class="status-text">—</h4>
+            <p>Current standing of your policy.</p>
+          </div>
+        </div>
+ 
+        <div class="panel-grid">
+          <div class="panel">
+            <div class="panel-header">
+              <h4>Recent Activity</h4>
+              <span class="panel-badge">3 items</span>
+            </div>
+            <ul class="activity-list">
+              <li><span class="activity-dot dot-blue"></span><span>Claim <strong>#CLM-2048</strong> submitted for temporary disability benefit</span></li>
+              <li><span class="activity-dot dot-teal"></span><span>March premium payment processed</span></li>
+              <li><span class="activity-dot dot-gray"></span><span>Beneficiary details updated successfully</span></li>
+            </ul>
+          </div>
+ 
+          <div class="panel">
+            <div class="panel-header"><h4>Quick Actions</h4></div>
+            <div class="quick-actions">
+              <button onclick="navigate('chat.html?q=Check my latest claim status')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M9 2H4C3.448 2 3 2.448 3 3V13C3 13.552 3.448 14 4 14H12C12.552 14 13 13.552 13 13V6L9 2Z" stroke="currentColor" stroke-width="1.4"/></svg>
+                Claim status
+              </button>
+              <button onclick="navigate('chat.html?q=What does my life cover include?')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><path d="M8 2L14 5V9C14 12 11.5 14.5 8 15C4.5 14.5 2 12 2 9V5L8 2Z" stroke="currentColor" stroke-width="1.4"/></svg>
+                Life cover
+              </button>
+              <button onclick="navigate('chat.html?q=When is my next premium due?')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><rect x="2" y="4" width="12" height="10" rx="1.5" stroke="currentColor" stroke-width="1.4"/><path d="M2 8H14" stroke="currentColor" stroke-width="1.4"/></svg>
+                Premium due
+              </button>
+              <button onclick="navigate('chat.html?q=How do I submit a disability or dread disease claim?')">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="6" stroke="currentColor" stroke-width="1.4"/><path d="M8 5V8M8 11H8.01" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                Submit claim
+              </button>
+            </div>
+          </div>
+        </div>
+      </main>
+    </section>
+  </div>
+ 
+  <script src="../../config.js"></script>
+  <script src="../Scripts/shared.js"></script>
+  <script src="../Scripts/dashboard.js"></script>
+</body>
+</html>

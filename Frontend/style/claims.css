@@ -1,0 +1,33 @@
+/* ─── Claims table ───────────────────────────────────────────────────────── */
+.claims-table { width: 100%; border-collapse: collapse; }
+
+.claims-table th {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.7px;
+  color: var(--text-muted);
+  padding: 0 14px 14px;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.claims-table td {
+  padding: 16px 14px;
+  font-size: 14px;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border);
+}
+
+.claims-table tbody tr:last-child td { border-bottom: none; }
+.claims-table tbody tr:hover td { background: var(--surface-2); }
+
+.claim-ref {
+  font-family: 'Courier New', monospace;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--accent-text);
+  background: var(--accent-light);
+  padding: 3px 8px;
+  border-radius: 5px;
+}

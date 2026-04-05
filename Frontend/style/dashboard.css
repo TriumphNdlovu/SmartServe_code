@@ -1,0 +1,165 @@
+/* ─── Cards grid ─────────────────────────────────────────────────────────── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.info-card {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.info-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); }
+
+.info-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+
+.card-blue::before  { background: var(--accent); }
+.card-teal::before  { background: var(--teal); }
+.card-amber::before { background: var(--amber); }
+.card-green::before { background: var(--green); }
+
+.card-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.card-blue  .card-icon { background: var(--accent-light); color: var(--accent-text); }
+.card-teal  .card-icon { background: var(--teal-light);   color: var(--teal-text);   }
+.card-amber .card-icon { background: var(--amber-light);  color: var(--amber-text);  }
+.card-green .card-icon { background: var(--green-light);  color: var(--green-text);  }
+
+.card-label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.info-card h4 {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+
+.info-card p { font-size: 13px; color: var(--text-secondary); }
+
+/* ─── Panel grid ─────────────────────────────────────────────────────────── */
+.panel-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.panel {
+  background: var(--surface);
+  border-radius: var(--radius-lg);
+  padding: 22px;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--border);
+}
+
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 18px;
+}
+
+.panel h4 {
+  font-family: var(--font-display);
+  font-size: 17px;
+  font-weight: 400;
+  color: var(--text-primary);
+  letter-spacing: -0.1px;
+}
+
+.panel-badge {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  padding: 3px 9px;
+  border-radius: 999px;
+}
+
+/* ─── Activity list ──────────────────────────────────────────────────────── */
+.activity-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+
+.activity-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 13.5px;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.activity-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-top: 5px;
+  flex-shrink: 0;
+}
+
+.dot-blue { background: var(--accent); }
+.dot-teal { background: var(--teal); }
+.dot-gray { background: var(--border-strong); }
+
+/* ─── Quick actions ──────────────────────────────────────────────────────── */
+.quick-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.quick-actions button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-md);
+  background: var(--surface-2);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition);
+}
+
+.quick-actions button:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+  color: var(--accent-text);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .cards-grid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  .cards-grid, .panel-grid, .quick-actions { grid-template-columns: 1fr; }
+}

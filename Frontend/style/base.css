@@ -1,0 +1,127 @@
+/* ─── Variables ──────────────────────────────────────────────────────────── */
+:root {
+  --font-display: 'DM Serif Display', Georgia, serif;
+  --font-body: 'DM Sans', system-ui, sans-serif;
+
+  --bg: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #f8f9fb;
+  --border: #e8eaee;
+  --border-strong: #d1d5db;
+
+  --text-primary: #111318;
+  --text-secondary: #5c6270;
+  --text-muted: #9aa0ae;
+
+  --sidebar-bg: #0e1117;
+  --sidebar-surface: #181e27;
+  --sidebar-border: rgba(255,255,255,0.07);
+  --sidebar-text: #e2e6ee;
+  --sidebar-muted: #7a8394;
+
+  --accent: #0ea5e9;
+  --accent-hover: #0284c7;
+  --accent-light: #e0f2fe;
+  --accent-text: #0369a1;
+
+  --teal: #0d9488;
+  --teal-light: #ccfbf1;
+  --teal-text: #0f766e;
+
+  --amber: #d97706;
+  --amber-light: #fef3c7;
+  --amber-text: #92400e;
+
+  --green: #16a34a;
+  --green-light: #dcfce7;
+  --green-text: #15803d;
+
+  --danger: #dc2626;
+  --danger-light: #fee2e2;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md: 0 4px 16px rgba(0,0,0,0.07), 0 2px 6px rgba(0,0,0,0.04);
+  --shadow-lg: 0 12px 40px rgba(0,0,0,0.1), 0 4px 12px rgba(0,0,0,0.06);
+
+  --transition: 160ms ease;
+}
+
+/* ─── Reset & Base ───────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: var(--font-body);
+  background: var(--bg);
+  color: var(--text-primary);
+  font-size: 15px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hidden { display: none !important; }
+
+/* ─── Shared animations ──────────────────────────────────────────────────── */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* ─── Status pill ────────────────────────────────────────────────────────── */
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border-radius: 999px;
+}
+
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.status-dot.small { width: 6px; height: 6px; }
+
+.status-pill.status-green { background: var(--green-light);  color: var(--green-text);  }
+.status-pill.status-green .status-dot { background: var(--green); }
+.status-pill.status-amber { background: var(--amber-light);  color: var(--amber-text);  }
+.status-pill.status-amber .status-dot { background: var(--amber); }
+.status-pill.status-red   { background: var(--danger-light); color: var(--danger);      }
+.status-pill.status-red   .status-dot { background: var(--danger); }
+.status-pill.status-blue  { background: var(--accent-light); color: var(--accent-text); }
+.status-pill.status-blue  .status-dot { background: var(--accent); }
+.status-pill.status-gray  { background: var(--surface-2);    color: var(--text-muted);  }
+.status-pill.status-gray  .status-dot { background: var(--border-strong); }
+
+/* ─── Status text colours ────────────────────────────────────────────────── */
+.text-green { color: var(--green); }
+.text-amber { color: var(--amber); }
+.text-red   { color: var(--danger); }
+.text-blue  { color: var(--accent); }
+.text-gray  { color: var(--text-muted); }
+
+/* ─── Badges ─────────────────────────────────────────────────────────────── */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.badge-review { background: var(--amber-light); color: var(--amber-text); }
+.badge-closed { background: var(--surface-2); color: var(--text-muted); border: 1px solid var(--border); }
+.badge-active { background: var(--green-light); color: var(--green-text); }
+
+/* ─── Empty state ────────────────────────────────────────────────────────── */
+.empty-state { color: var(--text-muted); font-size: 13px; font-style: italic; }

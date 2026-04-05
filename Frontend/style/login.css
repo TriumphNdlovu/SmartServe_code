@@ -1,0 +1,193 @@
+/* ─── Login screen ───────────────────────────────────────────────────────── */
+.login-screen {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.login-left {
+  background: var(--sidebar-bg);
+  position: relative;
+  overflow: hidden;
+  padding: 56px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.login-left-inner { position: relative; z-index: 2; }
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: white;
+  font-family: var(--font-display);
+  font-size: 18px;
+  margin-bottom: 60px;
+}
+
+.login-hero { margin-bottom: 48px; }
+
+.login-hero h1 {
+  font-family: var(--font-display);
+  font-size: 52px;
+  line-height: 1.1;
+  color: white;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+.login-hero h1 em { font-style: italic; color: var(--accent); }
+
+.login-hero p {
+  color: rgba(255,255,255,0.55);
+  font-size: 15px;
+  line-height: 1.7;
+  max-width: 380px;
+}
+
+.trust-items { display: flex; flex-direction: column; gap: 14px; }
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: rgba(255,255,255,0.6);
+  font-size: 14px;
+}
+
+.trust-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+/* Decorative geometric shapes */
+.geo {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+.geo-1 { width: 400px; height: 400px; right: -120px; top: -120px; }
+.geo-2 { width: 280px; height: 280px; right: -40px; top: -40px; background: rgba(14,165,233,0.04); }
+.geo-3 { width: 600px; height: 600px; right: -240px; bottom: -200px; }
+
+.login-right {
+  background: var(--bg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+.login-card {
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface);
+  padding: 40px;
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--border);
+}
+
+.login-card-header { margin-bottom: 32px; }
+
+.login-card-header h2 {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+  letter-spacing: -0.3px;
+}
+
+.subtext { color: var(--text-secondary); font-size: 14px; }
+
+.form-group { margin-bottom: 20px; }
+
+.form-group label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+  letter-spacing: 0.1px;
+}
+
+.input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  left: 14px;
+  color: var(--text-muted);
+  pointer-events: none;
+}
+
+.input-wrapper input {
+  width: 100%;
+  padding: 13px 14px 13px 42px;
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 14px;
+  color: var(--text-primary);
+  background: var(--surface);
+  transition: border-color var(--transition), box-shadow var(--transition);
+  outline: none;
+}
+
+.input-wrapper input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(14,165,233,0.12);
+}
+
+.input-wrapper input::placeholder { color: var(--text-muted); }
+
+.login-btn {
+  width: 100%;
+  margin-top: 8px;
+  padding: 14px 20px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: var(--accent);
+  color: white;
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: background var(--transition), transform var(--transition), box-shadow var(--transition);
+}
+
+.login-btn:hover {
+  background: var(--accent-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(14,165,233,0.3);
+}
+
+.login-btn:active { transform: translateY(0); }
+
+.error {
+  color: var(--danger);
+  font-size: 13px;
+  margin-top: 12px;
+  min-height: 18px;
+}
+
+/* ─── Mobile ─────────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .login-screen { grid-template-columns: 1fr; }
+  .login-left { display: none; }
+}
