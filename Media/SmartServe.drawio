@@ -46,17 +46,41 @@
         <mxCell id="YmZlOhZkK16TLFKdMkS7-11" edge="1" parent="1" source="YmZlOhZkK16TLFKdMkS7-10" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" target="YmZlOhZkK16TLFKdMkS7-5">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
+        <mxCell id="3b4T5mYDMHPGVF3wVSt9-10" edge="1" parent="1" source="3b4T5mYDMHPGVF3wVSt9-1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.25;entryDx=0;entryDy=0;" target="YmZlOhZkK16TLFKdMkS7-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
         <mxCell id="3b4T5mYDMHPGVF3wVSt9-1" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="Policy Service" vertex="1">
-          <mxGeometry height="200" width="200" x="870" y="60" as="geometry" />
+          <mxGeometry height="200" width="200" x="930" y="20" as="geometry" />
         </mxCell>
         <mxCell id="3b4T5mYDMHPGVF3wVSt9-2" parent="3b4T5mYDMHPGVF3wVSt9-1" style="rounded=0;whiteSpace=wrap;html=1;" value="getMockPolicy&amp;nbsp;" vertex="1">
           <mxGeometry height="35" width="200" y="30" as="geometry" />
         </mxCell>
-        <mxCell id="3b4T5mYDMHPGVF3wVSt9-3" parent="3b4T5mYDMHPGVF3wVSt9-1" style="rounded=0;whiteSpace=wrap;html=1;" value="" vertex="1">
+        <mxCell id="3b4T5mYDMHPGVF3wVSt9-3" parent="3b4T5mYDMHPGVF3wVSt9-1" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-size: 14px; line-height: 19px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&lt;font face=&quot;Helvetica&quot;&gt;premiumCollection&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
           <mxGeometry height="35" width="200" y="100" as="geometry" />
         </mxCell>
         <mxCell id="3b4T5mYDMHPGVF3wVSt9-4" parent="3b4T5mYDMHPGVF3wVSt9-1" style="rounded=0;whiteSpace=wrap;html=1;" value="getbeneficiaries" vertex="1">
           <mxGeometry height="35" width="200" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="3b4T5mYDMHPGVF3wVSt9-9" parent="3b4T5mYDMHPGVF3wVSt9-1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=default;" value="&lt;div style=&quot;color: rgb(187, 190, 191); background-color: rgb(18, 19, 20); font-size: 14px; line-height: 19px; white-space: pre;&quot;&gt;&lt;span style=&quot;color: rgb(165, 214, 255);&quot;&gt;&lt;font face=&quot;Helvetica&quot;&gt;benefits&lt;/font&gt;&lt;/span&gt;&lt;/div&gt;" vertex="1">
+          <mxGeometry height="35" width="200" y="135" as="geometry" />
+        </mxCell>
+        <mxCell id="3b4T5mYDMHPGVF3wVSt9-11" parent="1" style="swimlane;whiteSpace=wrap;html=1;" value="RAG Service" vertex="1">
+          <mxGeometry height="200" width="200" x="930" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="3b4T5mYDMHPGVF3wVSt9-12" parent="3b4T5mYDMHPGVF3wVSt9-11" style="rounded=0;whiteSpace=wrap;html=1;" value="Embedder" vertex="1">
+          <mxGeometry height="40" width="200" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="3b4T5mYDMHPGVF3wVSt9-13" parent="3b4T5mYDMHPGVF3wVSt9-11" style="rounded=0;whiteSpace=wrap;html=1;" value="&lt;span style=&quot;color: rgba(0, 0, 0, 0); font-family: monospace; font-size: 0px; text-align: start; white-space: nowrap;&quot;&gt;%3CmxGraphModel%3E%3Croot%3E%3CmxCell%20id%3D%220%22%2F%3E%3CmxCell%20id%3D%221%22%20parent%3D%220%22%2F%3E%3CmxCell%20id%3D%222%22%20parent%3D%221%22%20style%3D%22rounded%3D0%3BwhiteSpace%3Dwrap%3Bhtml%3D1%3B%22%20value%3D%22%26%2310%3B%26lt%3Bspan%20style%3D%26quot%3Bcolor%3A%20rgb(255%2C%20255%2C%20255)%3B%20font-family%3A%20Helvetica%3B%20font-size%3A%2012px%3B%20font-style%3A%20normal%3B%20font-variant-ligatures%3A%20normal%3B%20font-variant-caps%3A%20normal%3B%20font-weight%3A%20400%3B%20letter-spacing%3A%20normal%3B%20orphans%3A%202%3B%20text-align%3A%20center%3B%20text-indent%3A%200px%3B%20text-transform%3A%20none%3B%20widows%3A%202%3B%20word-spacing%3A%200px%3B%20-webkit-text-stroke-width%3A%200px%3B%20white-space%3A%20normal%3B%20background-color%3A%20rgb(27%2C%2029%2C%2030)%3B%20text-decoration-thickness%3A%20initial%3B%20text-decoration-style%3A%20initial%3B%20text-decoration-color%3A%20initial%3B%20display%3A%20inline%20!important%3B%20float%3A%20none%3B%26quot%3B%26gt%3BVectorStore%26lt%3B%2Fspan%26gt%3B%26%2310%3B%26%2310%3B%22%20vertex%3D%221%22%3E%3CmxGeometry%20height%3D%2235%22%20width%3D%22200%22%20x%3D%22930%22%20y%3D%22390%22%20as%3D%22geometry%22%2F%3E%3C%2FmxCell%3E%3C%2Froot%3E%3C%2FmxGraphModel%3E&lt;/span&gt;" vertex="1">
+          <mxGeometry height="35" width="200" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="3b4T5mYDMHPGVF3wVSt9-14" parent="3b4T5mYDMHPGVF3wVSt9-11" style="rounded=0;whiteSpace=wrap;html=1;" value="VectorStore" vertex="1">
+          <mxGeometry height="35" width="200" y="65" as="geometry" />
+        </mxCell>
+        <mxCell id="3b4T5mYDMHPGVF3wVSt9-16" parent="3b4T5mYDMHPGVF3wVSt9-11" style="rounded=0;whiteSpace=wrap;html=1;" value="retriever" vertex="1">
+          <mxGeometry height="35" width="200" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="3b4T5mYDMHPGVF3wVSt9-17" edge="1" parent="1" source="3b4T5mYDMHPGVF3wVSt9-16" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;" target="YmZlOhZkK16TLFKdMkS7-1">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
