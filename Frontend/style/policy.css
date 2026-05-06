@@ -1,22 +1,188 @@
-/* ─── Benefits list ──────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────
+   Policy Page Styles (SmartServe)
+   ───────────────────────────────────────────────────────── */
+
+/* Layout Containers */
+.app-container {
+  display: flex;
+  height: 100vh;
+  background: var(--background);
+}
+
+.main-app {
+  display: flex;
+  width: 100%;
+}
+
+.content-area {
+  flex: 1;
+  padding: 24px;
+  overflow-y: auto;
+}
+
+/* ─── Topbar ───────────────────────────────────────────── */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.topbar-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.topbar-left h3 {
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+.topbar-left p {
+  font-size: 13px;
+  color: var(--text-muted);
+}
+
+.topbar-right {
+  display: flex;
+  align-items: center;
+}
+
+/* Status Pill */
+.status-pill {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: var(--green-light);
+  color: var(--green);
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+/* ─── Cards Grid ───────────────────────────────────────── */
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Color Variants */
+.card-blue .card-icon {
+  background: var(--blue-light);
+  color: var(--blue);
+}
+
+.card-teal .card-icon {
+  background: var(--teal-light);
+  color: var(--teal);
+}
+
+.card-green .card-icon {
+  background: var(--green-light);
+  color: var(--green);
+}
+
+.card-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.info-card h4 {
+  font-size: 18px;
+  color: var(--text-primary);
+}
+
+/* ─── Panels ───────────────────────────────────────────── */
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 16px;
+}
+
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+}
+
+.panel-header h4 {
+  font-size: 15px;
+  color: var(--text-primary);
+}
+
+/* Badge */
+.badge {
+  font-size: 11px;
+  padding: 3px 8px;
+  border-radius: 999px;
+}
+
+.badge-active {
+  background: var(--green-light);
+  color: var(--green);
+}
+
+/* ─── Benefits & Beneficiaries List ───────────────────── */
 .benefits-list {
   list-style: none;
   display: flex;
   flex-direction: column;
-  gap: 12px;
 }
 
+/* Each Row */
 .benefits-list li {
   display: flex;
   align-items: flex-start;
-  gap: 10px;
-  font-size: 14px;
-  color: var(--text-secondary);
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border);
 }
 
+.benefits-list li:last-child {
+  border-bottom: none;
+}
+
+/* Icon */
 .benefit-icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   border-radius: 50%;
   background: var(--green-light);
   color: var(--green);
@@ -24,25 +190,58 @@
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  margin-top: 1px;
 }
 
-/* ─── Benefit row (name + meta pills) ───────────────────────────────────── */
+/* Content Column */
 .benefit-row {
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 6px;
+  flex: 1;
 }
 
-.benefit-name { font-size: 14px; color: var(--text-primary); }
+/* Title */
+.benefit-name {
+  font-size: 14px;
+  color: var(--text-primary);
+  font-weight: 500;
+}
 
-.benefit-metas { display: flex; gap: 8px; flex-wrap: wrap; }
+/* Meta Pills */
+.benefit-metas {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
 
 .benefit-meta {
-  font-size: 12px;
+  font-size: 11px;
   color: var(--text-muted);
   background: var(--surface-2);
   border: 1px solid var(--border);
-  padding: 2px 8px;
+  padding: 3px 8px;
   border-radius: 999px;
+}
+
+/* Hover Effect */
+.benefits-list li:hover {
+  background: var(--surface-2);
+  border-radius: 8px;
+  padding-left: 6px;
+  transition: all 0.2s ease;
+}
+
+/* ─── Responsive ───────────────────────────────────────── */
+@media (max-width: 768px) {
+  .content-area {
+    padding: 16px;
+  }
+
+  .topbar-left h3 {
+    font-size: 16px;
+  }
+
+  .info-card h4 {
+    font-size: 16px;
+  }
 }
