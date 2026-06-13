@@ -195,7 +195,7 @@ POLICIES = {
 
     "CH60345678": {
         "contractReference": "CH60345678",
-        "status": "LAP",  # Lapsed
+        "status": "INF",  # Lapsed
         "commencementDate": "2018-01-01",
         "maturityDate": "2058-12-31",
         "product": {
